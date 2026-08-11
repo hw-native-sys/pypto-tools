@@ -15,8 +15,6 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
 ### pypto pass 记录：
 
-- **下一版本中补充……** 
-
 
 ## chip泳道图
 
@@ -41,7 +39,7 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
   在搜索框输入节点名称（func_name或者task_id）可以模糊搜索节点。
 
-  ![image，现在搜索功能升级中，下个版本补充图片说明](./.image/0.png)
+  ![image](./.image/3_chip_swim_search.gif)
 
 - **泳道图导出**
 
@@ -56,6 +54,10 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
   ![image](./.image/5_chip_swim_set_line.gif)
 
+  添加的观测线会有其对应的时间戳显示。再次单击观测线，可以关闭操作面板。
+  ![image](./.image/5-2_chip_swim_set_line.gif)
+
+
   也可以通过鼠标右键单击任务，选择画线工具，支持标识出选中任务/同spmd任务的起止时间。
 
   ![image](./.image/6_chip_swim_set_spmd_line.gif)
@@ -65,7 +67,7 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
   点击右上角的的`性能统计`按钮，即可查看性能报告，在页面点击节点可以自动定位到图上对应位置，便于用户快速查看性能问题。
 
-  ![image，现在性能看板中内容还需要更新一下，下个版本补充图片说明](./.image/0.png)
+  ![image](./.image/7_chip_swim_perf.png)
 
 
 - **泳道置顶**
