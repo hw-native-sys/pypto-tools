@@ -14,7 +14,7 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 - **运行结果打开方式：**  chip级运行结果输出在 build_out/*/dfx_outpus 目录下。可以使用鼠标右键单击，选择`PyPTO Toolkit：打开文件`，从而使用插件预览。
 
 ### pypto pass 记录：
-
+- **IR trace diff：**  比对`passes_dump`目录下的IR前后记录，显示变化。
 
 ## chip泳道图
 
@@ -101,6 +101,11 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
   | a / d（支持在配置页面配置） | 横向移动     |
 
 
+## PASS记录
+
+- **打开IR Trace**
+  右键pass输出文件夹`passes_dump`，可以使用工具查看PASS阶段里各个IR变化。可以按照是否有更改内容显示哪些PASS阶段。可以按函数过滤显示变更内容。
+  ![image](./.image/pass_IR_trace.gif)
 
 
 ## 其他辅助功能
