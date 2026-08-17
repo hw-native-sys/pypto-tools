@@ -1,255 +1,259 @@
-# PyPTO Toolkit v4 插件使用说明
+# PyPTO Toolkit v4 Extension User Guide
 
-PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括编译、运行时状态的可视化、算子开发作业流的作业能力，使能开发者快速建立对 PyPTO 3.0 框架的理解，提升算子开发和调试调优效率。
+English | [简体中文](README.zh.md)
 
-## 核心特性
-### chip级任务记录：
+PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framework. It visualizes compilation and runtime states and provides operator development workflow capabilities, helping developers understand PyPTO 3.0 and improve operator development, debugging, and performance tuning efficiency.
 
-- **chip泳道图：** `chip_swimlane_records*.json`，提供片上任务和统计信息的可视化展示，支持基于`deps.json`的任务依赖关系分析和多种维度（任务执行时间、关键路径等）的统计报告信息展示。
+> For complete PyPTO 3.0 usage instructions, see the [PyPTO Toolkit documentation](https://www.pypto.ai/pypto-tools/). The documentation source is under [`docs/`](./docs/), and the latest extension package is available from [Releases](https://github.com/hw-native-sys/pypto-tools/releases/latest).
 
-- **任务依赖图：** `deps*.json`，提供任务之间的依赖关系展示和冗余依赖分析功能。
+## Key Features
 
-- **任务名称映射：** `name_map*.json`，展示用户定义的func_id和func_name对应关系。
+### Chip-level Task Records
 
-- **运行结果打开方式：**  chip级运行结果输出在 build_out/*/dfx_outpus 目录下。可以使用鼠标右键单击，选择`PyPTO Toolkit：打开文件`，从而使用插件预览。
+- **Chip Swimlane:** `chip_swimlane_records.json` (compatible with `l2_swimlane_records.json`) visualizes on-chip tasks and statistics, analyzes task dependencies using `deps.json`, and highlights existing critical-path results.
 
-### pypto pass 记录：
-- **IR trace diff：**  比对`passes_dump`目录下的IR前后记录，显示变化。
+- **Task Dependency Graph:** `deps.json` visualizes dependencies between tasks and analyzes redundant dependencies.
 
-## chip泳道图
+- **Function Performance Table:** `name_map*.json`, together with swimlane data in the same directory, aggregates invocation count and maximum, minimum, and average duration by function.
 
-- **打开泳道图**
+- **Open Runtime Results:** Chip-level runtime results are typically generated under `build_out/*/dfx_outputs`. Right-click a supported file and select `PyPTO Toolkit: Open File` to preview it in the extension.
 
-  在泳道图 json 文件上右键选择`PyPTO Toolkit: 打开文件`即可打开。根据采集时设置的`--enable-chip-swimlane`的等级，打开的图中会出现对应数量的view。全量采集的泳道图包含：Worker View、Scheduler View、AICPU Scheduler和AICPU Orchestrator。
+### PyPTO Pass Records
 
-    ![image](./.image/1_chip_swim_open.gif)
+- **IR Trace Diff:** Compares IR snapshots under a `passes_dump` directory and displays changes introduced by each pass.
 
-- **查看节点详情**
+## Chip Swimlane
 
-  点击节点可以在下方面板查看节点详情。在同级目录中存在对应`deps.json`的情况下，会同时显示与其有依赖关系连线的任务。通过设置`任务连线层级`的数值可以配置泳道图中最大显示依赖层级数量。
+- **Open a Swimlane**
 
-  当选中的节点是一个spmd任务时，因为同spmd任务的func_name、task_id都是一样的，所有会同时高亮所有的同spmd任务。但是如果是依赖路径上的spmd任务，则只显示其第一个，这样避免出现大量的任务依赖连线遮挡视图。
+  Right-click a swimlane JSON file and select `PyPTO Toolkit: Open File`. The number of views depends on the `--enable-chip-swimlane` collection level. A full record contains the Worker View, Scheduler View, AICPU Scheduler, and AICPU Orchestrator.
 
-    ![image](./.image/2_chip_swim_click_task.gif)
+  ![Open a swimlane](./.image/1_chip_swim_open.gif)
 
+- **Inspect Task Details**
 
+  Select a task to view its details in the lower panel. When a matching `deps.json` exists in the same directory, tasks connected by dependencies are also shown. Set the task dependency depth to control the maximum number of dependency levels displayed in the swimlane.
 
+  Selecting an SPMD task highlights all SPMD tasks with the same `func_name` and `task_id`. On a dependency path, only the first matching SPMD task is shown to prevent excessive dependency lines from obscuring the view.
 
-- **节点搜索**
+  ![Inspect task details](./.image/2_chip_swim_click_task.gif)
 
-  在搜索框输入节点名称（func_name或者task_id）可以模糊搜索节点。
+- **Search for Tasks**
 
-  ![image](./.image/3_chip_swim_search.gif)
+  Enter a `func_name` or Task ID in the search box to locate matching tasks with a fuzzy search.
 
-- **泳道图导出**
+  ![Search for a task](./.image/3_chip_swim_search.gif)
 
-  支持导出泳道图为 png 图片
+- **Export a Swimlane**
 
-  ![image](./.image/4_chip_swim_save_pic.gif)
+  Export the swimlane as a PNG image.
 
+  ![Export a swimlane](./.image/4_chip_swim_save_pic.gif)
 
-- **添加观测线**
+- **Add Time Markers**
 
-  在二段轴上点击可以添加观测线，点击观测线可以删除或修改。
+  Select the secondary time axis to add a marker. Select a marker to delete or edit it.
 
-  ![image](./.image/5_chip_swim_set_line.gif)
+  ![Add a time marker](./.image/5_chip_swim_set_line.gif)
 
-  添加的观测线会有其对应的时间戳显示。再次单击观测线，可以关闭操作面板。
-  ![image](./.image/5-2_chip_swim_set_line.gif)
+  Each marker displays its timestamp. Select the marker again to close the action panel.
 
+  ![Close the marker panel](./.image/5-2_chip_swim_set_line.gif)
 
-  也可以通过鼠标右键单击任务，选择画线工具，支持标识出选中任务/同spmd任务的起止时间。
+  You can also right-click a task and use the marker tool to mark the start and end of the selected task or identically named SPMD tasks.
 
-  ![image](./.image/6_chip_swim_set_spmd_line.gif)
+  ![Mark SPMD task boundaries](./.image/6_chip_swim_set_spmd_line.gif)
 
+- **Performance Panel**
 
-- **性能看板**
+  Select **Performance Statistics** in the upper-right corner to view the performance report. Selecting a task in the report locates the corresponding task in the swimlane.
 
-  点击右上角的的`性能统计`按钮，即可查看性能报告，在页面点击节点可以自动定位到图上对应位置，便于用户快速查看性能问题。
+  ![Performance panel](./.image/7_chip_swim_perf.png)
 
-  ![image](./.image/7_chip_swim_perf.png)
+- **Pin a Lane**
 
+  Hover over the left side of a lane to display the pin icon, then select it to pin the lane to the top.
 
-- **泳道置顶**
+  ![Pin a lane](./.image/8_chip_swim_top.gif)
 
-  鼠标悬浮泳道左侧区域，会显示置顶图标，点击即可将本泳道置顶
+- **Configure Setup Display in the Worker View**
 
-  ![image](./.image/8_chip_swim_top.gif)
+  Select **Rendering Settings** in the upper-right corner to configure whether the setup phase is displayed separately in Worker View task records. You can also hide setup entirely.
 
-- **Worker View中setup的显示配置**
+  ![Configure setup display](./.image/9_chip_swim_show_setup.gif)
 
-  点击右上角的的`渲染配置`按钮打开配置面板，可以配置Worker View中的任务记录中，是否区别显示出其setup阶段。也可以直接关闭setup阶段的显示。
+- **Highlight a Critical Path**
 
-  ![image](./.image/9_chip_swim_show_setup.gif)
+  The critical-path analysis tool generates `CPM_observed.json` and `CPM_static.json` under `dfx_outputs`. Open **Rendering Settings** and select the required critical-path result. In the Worker View, tasks outside the critical path lose their color and cannot be selected.
 
-- **关键路径显示**
+  ![Highlight a critical path](./.image/10_chip_swim_show_CPM.gif)
 
-  使用仓库内的关键路径方法工具会在dfx_ouputs目录下生成`CPM_observed.json`和`CPM_static.json`。点击右上角的的`渲染配置`按钮打开配置面板，可以选择对应的关键路径预览。泳道图的Worker view中会让非关键路径上的任务失去彩色着色并让其不可被选中
+- **Keyboard and Mouse Shortcuts**
 
-  ![image](./.image/10_chip_swim_show_CPM.gif)
+  | Shortcut | Function |
+  |---|---|
+  | Mouse wheel | Move vertically |
+  | `Ctrl` + left mouse button | Move horizontally |
+  | `Ctrl` + mouse wheel | Zoom |
+  | `Alt` + left mouse button | Measure a time interval manually |
+  | `w` / `s` (configurable) | Zoom in/out |
+  | `a` / `d` (configurable) | Move horizontally |
 
+## Pass Records
 
-- **快捷键列表**
+- **Open IR Pass Trace**
 
-  | 快捷键                      | 功能描述     |
-  | --------------------------- | ------------ |
-  | 鼠标滚轮                    | **纵向**移动 |
-  | 鼠标左键 + CTRL             | **横向**移动 |
-  | 鼠标滚轮 + CTRL             | 缩放         |
-  | 鼠标左键 + ALT              | 手动测距     |
-  | w / s（支持在配置页面配置） | 放大 / 缩小  |
-  | a / d（支持在配置页面配置） | 横向移动     |
+  Right-click a `passes_dump` directory to inspect IR changes introduced by compiler passes. You can filter changed and unchanged passes and filter differences by function.
 
+  ![IR Pass Trace](./.image/pass_IR_trace.gif)
 
-## PASS记录
+## Other Helper Features
 
-- **打开IR Trace**
-  右键pass输出文件夹`passes_dump`，可以使用工具查看PASS阶段里各个IR变化。可以按照是否有更改内容显示哪些PASS阶段。可以按函数过滤显示变更内容。
-  ![image](./.image/pass_IR_trace.gif)
+- **Close All Pages Opened by PyPTO Toolkit**
 
+  When multiple pages are open, use `PyPTO Toolkit: Close all tool page` to close every page opened by the extension.
 
-## 其他辅助功能
+  ![Close all tool pages](https://ascend-cann.obs.cn-north-4.myhuaweicloud.com/devkit/images/1.0.3%20allTabsOneClose.gif)
 
-- **一键关闭插件所有页面**
+## Feedback Channel
 
-  当打开的页面较多时，可以通过`PyPTO Toolkit: 关闭所有工具页面`菜单来一键关闭插件打开的所有页面
+If you have any questions or suggestions, open an issue at [https://github.com/hw-native-sys/pypto-tools](https://github.com/hw-native-sys/pypto-tools/issues).
 
-  ![image](https://ascend-cann.obs.cn-north-4.myhuaweicloud.com/devkit/images/1.0.3%20allTabsOneClose.gif)
+## Disclaimer
 
-## 反馈渠道
+### 1. Scope of Application
 
-如有任何问题和建议，欢迎提ISSUE：[https://github.com/hw-native-sys/pypto-tools](https://github.com/hw-native-sys/pypto-tools)
+This License Agreement (hereinafter “this Agreement”) governs the non-exclusive use of the PyPTO Toolkit (hereinafter “PyPTO Toolkit”) on Huawei AI processors within the territory of the People’s Republic of China between you and any company you are authorized to represent (collectively referred to as “you” or “your”) and Huawei Technologies Co., Ltd. and its affiliates (collectively referred to as “Huawei”).
+You may download, install, and use (hereinafter “accept”) the PyPTO Toolkit in accordance with this Agreement only after agreeing to its terms. If you do not agree to this Agreement or lack the capacity to enter into this Agreement as described herein, you must not download, install, or use the PyPTO Toolkit.
+This Agreement does not apply to open-source software contained in the PyPTO Toolkit. For the avoidance of doubt, open-source and third-party software included in the PyPTO Toolkit may be governed by separate license terms. In the event of any conflict between the provisions of this Agreement and any third-party license terms, the third-party license terms shall prevail only to the extent necessary to resolve the conflict.
 
-## 免责声明
+### 2. Definitions
 
-### 1. 适用范围
+2.1 “PyPTO Toolkit” means the PyPTO Toolkit software, documentation, and updates thereof developed and maintained by Huawei, published on the webpage where this Agreement is located, and intended exclusively for use on Huawei AI processors.
 
-本许可协议（下称“本协议”）适用于您及您有权代表的公司（统称为“您”或“您的”）与华为技术有限公司及其关联公司（统称为“华为”）之间在中华人民共和国境内在华为AI处理器上对PyPTO Toolkit（下称“PyPTO Toolkit”）的非排他的使用。您同意本协议的约定，方可下载、安装以及按照本协议约定使用（下称“接受”） PyPTO Toolkit。如果您不同意本协议的约定或者您没有本协议约定的上述缔约资格，请不要下载、安装以及按照本协议约定使用 PyPTO Toolkit。本协议不适用于PyPTO Toolkit中所包含的开源软件。为免疑义，在 PyPTO Toolkit 中包含的开源及第三方软件，也可能受单独的许可条款管辖。如果本协议中的条款与第三方许可条款之间存在任何冲突，则第三方许可条款仅应在解决冲突所需的范围内适用。
+2.2 “CANN” means Compute Architecture for Neural Networks, the end-to-cloud consistent heterogeneous computing architecture launched by Huawei for artificial intelligence.
 
-### 2. 定义
+2.3 “User” means an individual or entity that has entered into this Agreement with Huawei to download and use the PyPTO Toolkit.
 
-2.1 PyPTO Toolkit是指由华为主导的仅用于CANN的开发、维护、并在本协议所在的网页发布的仅用于华为AI处理器的PyPTO Toolkit软件、文档等及其更新。
+2.4 “Object Code” means computer-executable program code in binary form.
 
-2.2 CANN是指Compute Architecture for Neural Networks，即由华为面向AI推出的端云一致的异构计算架构。
+2.5 “Source Code” means software code written in accordance with programming language specifications, uncompiled, and readable by humans.
 
-2.3 用户是指与华为签订本协议下载PyPTO Toolkit，并使用该PyPTO Toolkit的个人或实体。
+2.6 “Open-Source Software” means any Source Code or Object Code subject to an “Open Source License.” Software provided in Source Code form but not publicly distributed in the PyPTO Toolkit is not Open-Source Software. An “Open-Source License” means a type of software license that allows users to freely use, modify, and redistribute the software and its source code, while complying with certain conditions set by the license.
 
-2.4 目标代码是指二进制形式的计算机可执行的程序代码。
+2.7 Huawei AI Processors mean AI chipsets (i) branded with "Ascend", "Kirin", "Yueying" or other brands owned or controlled by Huawei; or (ii) manufactured (including have manufactured), supplied (including have supplied) or designed (including have designed) by Huawei.
 
-2.5 源代码是指按照程序设计语言规范编写的、未编译的、人类可读的软件代码。
+### 3. Scope of License
 
-2.6 开源软件是指任何受“开源许可证”约束的源代码或者目标代码。PyPTO Toolkit中以源代码形式、非公开分发的软件不属于开源软件。开源许可证是指一种软件许可协议，它允许用户在遵守该许可证所设定的特定条件的前提下，自由地使用、修改以及分发该软件及其源代码。
+Subject to your full compliance with all terms of this Agreement during its term, Huawei grants you, as a User, a non-exclusive license to:
 
-2.7 华为AI处理器是指（i）带有“昇腾”、“麒麟”、“越影”或其他华为拥有或控制品牌的AI芯片；或（ii）由华为制造（包括委托制造）、供应（包括委托供应）或设计（包括委托设计）的AI芯片。
+(1) download and install the PyPTO Toolkit;
 
-### 3. 许可范围
+(2) develop software exclusively for use on Huawei AI processors based on the PyPTO Toolkit;
 
-在本协议有效期内，您遵守本协议全部约定的前提下，华为授权作为用户的您：
+(3) compile software exclusively for use on Huawei AI processors based on the PyPTO Toolkit;
 
-（1）下载、安装 PyPTO Toolkit；
+(4) test software exclusively for use on Huawei AI processors based on the PyPTO Toolkit;
 
-（2）基于PyPTO Toolkit开发仅在华为AI处理器上运行的软件；
+(5) diagnose software exclusively for use on Huawei AI processors based on the PyPTO Toolkit;
 
-（4）基于PyPTO Toolkit编译仅在华为AI处理器上运行的软件；
+(6) use software exclusively for use on Huawei AI processors in other ways based on the PyPTO Toolkit.
 
-（5）基于PyPTO Toolkit测试仅在华为AI处理器上运行的软件；
+### 4. Use Restrictions
 
-（6）基于PyPTO Toolkit诊断仅在华为AI处理器上运行的软件；
+4.1 Except as expressly permitted in this Agreement, you shall not:
 
-（7）基于PyPTO Toolkit以其他方式使用仅在华为AI处理器上运行的软件。
+(1) use, copy, disclose, distribute, or publicly display the PyPTO Toolkit;
 
-### 4. 使用限制
+(2) share, publish, rent, or lease the PyPTO Toolkit to any third party;
 
-4.1 除本协议明确约定外，您不得：
+(3) assign your rights or obligations under this Agreement or transfer the PyPTO Toolkit;
 
-（1）使用、复制、披露、分发或公开展示PyPTO Toolkit；
+(4) modify, adapt, or translate the PyPTO Toolkit, in whole or in part;
 
-（2）共享、发布、出租或租赁PyPTO Toolkit给任何第三方；
+(5) reverse engineer, decompile, disassemble, or attempt to derive the Source Code of the PyPTO Toolkit by any other means;
 
-（3）转让您在本协议中的权利及义务或转让PyPTO Toolkit；
+(6) circumvent or breach any technological restriction in the PyPTO Toolkit;
 
-（4）全部或部分修改、改编或翻译PyPTO Toolkit；
+(7) use the PyPTO Toolkit on non-Huawei AI processors;
 
-（5）逆向工程、反编译或反汇编PyPTO Toolkit，或试图以其他方式导出PyPTO Toolkit软件的源代码；
+(8) run software that incorporates the PyPTO Toolkit on non-Huawei AI processors;
 
-（6）规避或破解PyPTO Toolkit中的任何技术限制；
+(9) modify or translate software incorporating the PyPTO Toolkit for use on non-Huawei AI processors;
 
-（7）将PyPTO Toolkit用于非华为AI处理器；
+(10) remove, obscure, block, or modify any notice of Huawei or its suppliers contained in the PyPTO Toolkit materials;
 
-（8）将集成PyPTO Toolkit的软件运行到非华为AI处理器；
+(11) include the PyPTO Toolkit in any malicious, deceptive, or unlawful plan or product, or use it in any unlawful manner;
 
-（9）集成PyPTO Toolkit的软件通过修改、翻译等方式用于非华为AI处理器；
+(12) modify, create derivative works of, link to, integrate, or distribute non-open-source portions of the PyPTO Toolkit in such a way that any part becomes Open-Source Software;
 
-（10）删除、最小化、阻止或修改PyPTO Toolkit材料中华为或其供应商的任何通知；
+(13) distribute non-open-source portions of the PyPTO Toolkit independently in Source Code form or integrated with other software;
 
-（11）将PyPTO Toolkit包括在恶意、欺骗或非法的计划或产品中，或以任何违法的方式使用PyPTO Toolkit；
+(14) use the PyPTO Toolkit obtained under this Agreement for intellectual property infringement analysis or forensic purposes against Huawei or Huawei’s customers;
 
-（12）修改、创建衍生作品、链接、集成或分发非开源的PyPTO Toolkit，使其任何部分成为开源软件；
+(15) disclose PyPTO Toolkit-related data (including but not limited to performance benchmark data) publicly without Huawei’s prior written consent;
 
-（13）以源代码的形式独立分发或与其他软件集成分发PyPTO Toolkit中非开源软件；
+(16) use batch download tools, crawlers, or similar means to download the PyPTO Toolkit.
 
-（14）将基于本协议获得的PyPTO Toolkit用于针对华为或华为客户的知识产权侵权分析、取证；
+4.2 You may not use the PyPTO Toolkit or any Huawei brand to provide any quality warranty or guarantee for software you develop or services you provide. You assume full responsibility to your customers for any updates, support obligations, or other obligations or liabilities arising from the distribution of your products or services, and you shall defend Huawei against any claims, lawsuits, or expenses arising from disputes or litigation related to the software you develop or services you provide.
 
-（15）未经华为书面同意公开PyPTO Toolkit相关数据，包括但不限于性能评估数据；
+4.3 The rights granted to you under this Agreement are non-transferable without Huawei’s prior written consent. You may transfer the PyPTO Toolkit received under this Agreement and all your rights hereunder only in connection with a change of ownership, merger, acquisition, sale, or transfer of all or substantially all of your business or assets to another party (collectively “Transferee”), provided that you:
+(i) notify Huawei in writing by letter of the transfer, identifying (a) the Transferee and your legal entity, (b) the specific PyPTO Toolkit being transferred, (c) that you retain no copies of the PyPTO Toolkit or any portion thereof, and (d) that the Transferee has agreed in writing to be bound by all terms and conditions of this Agreement.
 
-（16）使用批量下载工具，爬虫工具等下载PyPTO Toolkit；
+### 5. Updates
 
-4.2 您不得用PyPTO Toolkit及华为的品牌为您开发的软件或提供的服务提供质量保证。您对使用您开发的软件或提供的服务的客户全权负责与此有关的任何更新、支持义务或其他因分销您的产品或服务而产生的义务或责任，且您有义务在因您开发的软件或提供的服务所引发的争议或诉讼中为华为提供辩护，使其免受任何索赔、诉讼或费用支出（若有）。
+Huawei may update the PyPTO Toolkit at any time. Unless such updates are accompanied by separate license terms, they shall be deemed part of the PyPTO Toolkit under this Agreement. You agree that Huawei is not required to notify you in advance of any update. While Huawei generally seeks to maintain version compatibility, Huawei does not guarantee that updates will be backward compatible in all cases.
 
-4.3 本协议授权您的各项权利，除非获得华为的书面同意，否则不可转让。您只能在所有权变更、合并、收购、出售或转让您的全部或实质上全部业务或资产的同时，才可将您根据本协议收到的PyPTO Toolkit以及您在本协议下的所有权利转让给另一方（统称为“受让人”），但您将根据本协议收到的PyPTO Toolkit以及您在本协议下的所有权利转让给另一方，需要遵循以下约束：您必须通过向华为发送信函书面通知华为转让：（i）明确受让人和您的法律实体，（ii）明确要转让的 PyPTO Toolkit，（iii）证明您不保留 PyPTO Toolkit 或其部分的副本，（iv）证明受让人已书面同意受本协议所有条款和条件的约束。
+### 6. Ownership
 
-### 5. 材料更新
+All right, title, and interest in and to the PyPTO Toolkit and all copies thereof remain vested in Huawei. The PyPTO Toolkit is protected by copyright laws and international treaty provisions. You shall not remove any copyright or other proprietary notices from the materials. You agree not to reproduce the PyPTO Toolkit except as expressly authorized herein. Except for the express rights granted to you in this Agreement, no other rights or licenses are granted to you hereunder, whether by implication, estoppel or otherwise. In particular, Huawei does not grant you any express or implied rights under any patents, copyrights, trademarks, or trade secrets of Huawei.
 
-华为可随时对PyPTO Toolkit进行更新。除非这些更新包含独立的许可条款，否则这些更新视为本协议中的 PyPTO Toolkit 的一部分，适用于本协议。您同意华为对PyPTO Toolkit的更新，不需要事先对您进行通知。尽管华为通常会保证PyPTO Toolkit 版本的兼容性，但不排除在一些情况下，华为对PyPTO Toolkit的更新会引入对PyPTO Toolkit未来版本的不兼容。
+### 7. Feedback
 
-### 6. 所有权
+Any materials, information, comments, suggestions, ideas, or other input that you provide to Huawei in connection with your use of the PyPTO Toolkit (collectively, “Feedback”) is provided on a non-confidential basis. You hereby grant Huawei a non-exclusive, perpetual, irrevocable, royalty-free, worldwide license to use, copy, modify, create derivative works of, publicly display, disclose, distribute, sublicense, and otherwise exploit the Feedback and all data, images, audio, text, and other content contained therein (including any derivative works) for any commercial or non-commercial purpose and in any manner whatsoever.
+If such Feedback relates to features, functionality, or improvements, you further grant Huawei a non-exclusive, perpetual, irrevocable, royalty-free, worldwide patent license (including the right to sublicense) under any patents or patent applications owned or controlled by you that are necessarily infringed by implementing such Feedback.
 
-PyPTO Toolkit及其所有副本的所有权归华为所有。PyPTO Toolkit受知识产权保护，包括但不限于著作权法和国际条约规定。您不得从材料中删除任何版权或其他专有声明。您同意不得未经授权的复制PyPTO Toolkit。除在本协议中明确授权您的权利外，本协议不授予您任何其他权利或许可；特别地，华为不授予您任何明示或暗示的华为专利、版权、商标或商业秘密权利。
+### 8. Confidentiality
 
-### 7. 反馈
+If no separate confidentiality agreement exists between you and Huawei regarding the use of the PyPTO Toolkit, the following provisions shall apply.
+The PyPTO Toolkit constitutes confidential information of Huawei and may be used solely for the purposes expressly permitted under this Agreement. You shall protect Huawei’s confidential information with at least the same degree of care that you use to protect your own confidential information of a similar nature, but in no event less than reasonable care. You shall disclose confidential information only to your employees (including contractors and subcontractors who have executed confidentiality agreements with you) who have a legitimate need to know such information for the permitted purposes and who are bound by confidentiality obligations at least as protective as those contained herein. You shall be responsible for any breach of this Agreement by your employees, contractors, or subcontractors.
 
-您同意根据您使用PyPTO Toolkit提供给华为的任何材料、信息、评论、建议或其他信息（统称“反馈意见”），您在此授予华为非独占、永久的、不可撤销、免费的版权许可，华为可以基于您提供的反馈意见复制、修改、创建衍生作品、公开展示、披露、分发、许可和分许可或其他任何方式，将反馈意见及其包含的所有数据、图像、声音、文本和其他内容，包括其衍生作品，用于任何商业或非商业目的，并用于任何方式的使用。如果您根据您使用 PyPTO Toolkit提供给华为的反馈意见与技术特性、功能相关，您在此授予华为非独占的、永久的、不可撤销的、免费的专利许可及分许可权利。
+### 9. Limitation of Liability and Exclusion
 
-### 8. 保密义务
+To the maximum extent permitted by applicable law, in no event shall Huawei be liable for any direct, indirect, incidental, consequential, special, exemplary, or punitive damages arising out of or in connection with your use of the PyPTO Toolkit under this Agreement, including but not limited to: (i) loss of revenue; (ii) loss of actual or anticipated profits; (iii) loss of use of money; (iv) loss of anticipated savings; (v) loss of business; (vi) loss of opportunity; (vii) loss of goodwill; (viii) loss of use of software; (ix) loss of reputation; (x) loss of, damage to, or corruption of data; or (xi) any other indirect, incidental, special, or consequential damages or losses — whether foreseeable, foreseen, known, or otherwise — even if H has been advised of the possibility of such damages.
 
-如果您与华为之间就使用PyPTO Toolkit没有签订独立的保密协议，本协议以下约定将适用您使用PyPTO Toolkit要遵从的保密条款。本协议中约定的PyPTO Toolkit是华为的保密信息，这些PyPTO Toolkit仅用于根据本协议进行使用的目的。您将以至少与您保护自己的保密信息相同的谨慎程度维护华为机密信息，并至少不低于合理程度。您将仅向需要了解并同意遵守保密条款的员工披露保密信息，您将对任何此类员工的违反本协议约定的行为负责。就本协议而言，员工将包括与您签署保密协议的您的下游分包商。
+### 10. No Warranty
 
-### 9. 责任限制与排除
+10.1 THE PyPTO TOOLKIT IS PROVIDED “AS IS” WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, OR ANY OTHER WARRANTY ARISING BY STATUTE, COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OF TRADE, OR OTHERWISE.
 
-在任何情况下，华为不对您根据本协议使用PyPTO Toolkit而产生或与之相关的任何直接、间接、附带、后果、特殊或其他损失或损害负责，包括但不限于，下列任何损失或损害（无论此类损失或损害是预见的、可预见的、已知的或其他的）：（i）收入损失；（ii）实际或预期利润损失；（ii）货币使用损失；（iv）预期节约的损失；（v）业务损失；（vi）机会损失；（vii）商誉损失；（viii）软件的使用损失；（ix）声誉损失；（x）损失、损害，或数据损坏；或（xi）任何间接、附带的特殊或间接损害损失。
+10.2 Except to the extent prohibited by applicable law, Huawei does not warrant that the software in the PyPTO Toolkit (including any third-party or open-source software) will be error-free or operate without interruption. Huawei will use reasonable efforts to respond to and provide mitigation or patches for significant software vulnerabilities affecting product usability that are reported during the lifecycle of the PyPTO Toolkit, but does not warrant that Huawei will identify, test, or correct all defects. Furthermore, due to the evolving nature of intrusion and network attack techniques, Huawei does not warrant that the PyPTO Toolkit or any device, system, or network using the PyPTO Toolkit will be free from intrusion or attack.
 
-### 10. 不保证
+### 11. Term and Termination
 
-10.1 本协议中的PyPTO Toolkit，华为不提供任何明示、暗示的保证，包括但不限于关于适销性、适用于任何特定目的的保证或条件、不侵权等任何原因而产生的任何保证。
+11.1 This Agreement commences upon your acceptance and continues until terminated. Huawei may terminate this Agreement immediately upon written notice if you fail to cure any material breach of this Agreement within thirty (30) days after receiving written notice thereof. You shall be liable for any losses caused to Huawei by such breach, including reasonable attorneys’ fees and litigation costs.
 
-10.2 除法律另有明确规定外，华为不保证PyPTO Toolkit 中的软件（包括但不限于第三方软件或开源软件）无错误或不间断地运行，华为将积极响应并提供在 PyPTO Toolkit 生命周期内出现的影响产品使用的重大软件漏洞的缓解措施或修补方案，但不保证华为会测试、纠正所有错误。此外，由于不断出现新的入侵和攻击网络的技术，华为不保证 PyPTO Toolkit 或使用 PyPTO Toolkit 的任何设备、系统或网络不会受到入侵或攻击。
+11.2 This Agreement shall automatically terminate upon your initiation of any lawsuit against Huawei or any lawsuit concerning the PyPTO Toolkit itself against any third party.
 
-### 11. 期限和终止
+11.3 You agree to ensure that your customers provide at least the same level of protection to the PyPTO Toolkit as set forth in this Agreement. If any customer of yours violates this Agreement or infringes Huawei’s intellectual property rights in connection with the sale, use, or distribution of software developed by you that incorporates the PyPTO Toolkit, or in connection with the sale or use of Huawei AI processors containing the PyPTO Toolkit, you shall promptly take reasonable measures to stop such violation or infringement. If you fail to take effective measures, Huawei may terminate this Agreement. You shall be liable for any losses caused to Huawei as a result, including reasonable attorneys’ fees and litigation costs.
 
-11.1 本协议自您接受本协议之日起生效。如果您违反了本协议任何条款和条件，并且在华为书面通知后三十（30）天内，此类违约行为未得到纠正，华为可立即终止本协议，您将承担由此给华为造成的损失，该损失包含诉讼费和律师费。
+11.4 In addition to the foregoing liability, Huawei shall be entitled to seek injunctive relief with respect to any such violation or infringement.
 
-11.2 如果您在本协议期间发起针对华为的诉讼或对第三方使用的PyPTO Toolkit本身提起诉讼，本协议在您发起诉讼之日起自动终止。
+11.5 Upon termination of this Agreement, you shall immediately return or destroy all copies of the PyPTO Toolkit and certify such destruction in writing upon Huawei’s request. Any valid distribution of the PyPTO Toolkit made by you prior to the effective date of termination shall remain unaffected by the termination.
 
-11.3 您将同意您为PyPTO Toolkit提供与本协议至少同等的保护，如果您的客户在销售、使用您开发的集成了PyPTO Toolkit 的软件的过程中，或者销售、使用安装了 PyPTO Toolkit 的华为AI处理器的过程中出现违反本协议约定的行为或其他侵犯PyPTO Toolkit知识产权的行为，您将及时采取措施制止上述行为。如果您未采取有效措施，华为可终止本协议。您将承担上述行为给华为造成的损失，该损失包含诉讼费和律师费。
+11.6 Sections 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, and 14 shall survive any expiration or termination of this Agreement.
 
-11.4 您将同意，除您承担上述给华为造成的损失外，针对上述行为，华为还有权采取禁令的方式进行救济。
+### 12. Audit
 
-11.5 本协议终止后，您将立即返还或销毁PyPTO Toolkit及其所有副本。如果本协议终止，则在终止生效日期之前，您根据本协议分发的任何PyPTO Toolkit将在本协议的任何此类终止后继续有效。
+Upon thirty (30) days’ prior written notice, Huawei may audit your use of the PyPTO Toolkit to verify compliance with this Agreement. The audit may include, but is not limited to, examination of software functionality, applications, backup and archiving records, installation counts, copy counts, and distribution records. Huawei may designate a third-party auditor to conduct such audit on its behalf. You agree to cooperate fully with the audit and provide reasonable assistance, including access to relevant books, records, contracts, technical support documentation, order reports, and systems.
 
-11.6 本协议第 1、2、4、5、6、7、8、9、10、11、12 条将在本协议到期或终止后继续有效。
+### 13. Export Control
 
-### 12. 审计
+13.1 You agree that the PyPTO Toolkit provided under this Agreement is intended solely for use on Huawei AI processors located within the territory of the People’s Republic of China. If you are an authorized user providing cloud services, you agree to offer services supported by the PyPTO Toolkit only to customers within the People’s Republic of China.
 
-您同意，华为可在发出书面通知三十（30）日后，有权对您 PyPTO Toolkit 的使用情况进行审计。审计的重点为包含但不限于软件的功能、应用、备份、归档记录、安装数量、复制数量、分发数量等。华为有权指定第三方代理行使上述审计权利。您同意配合华为审计并提供合理的协助。您同意提供包括但不限于帐簿、报表、合同、技术支持文档、订单报告系统等给华为。
+13.2 You acknowledge that the export or re-export of the PyPTO Toolkit or products incorporating the PyPTO Toolkit may be subject to export control laws and regulations. You shall not export or re-export the PyPTO Toolkit or any product incorporating it in violation of such laws or for any prohibited end-use.
 
-### 13. 出口管制
+### 14. General Provisions
 
-13.1 您同意，本协议中约定的 PyPTO Toolkit 只应用于运行在中华人民共和国境内的华为AI处理器；如果您是授权用户并且作为云服务提供商，您同意运行只向中华人民共和国境内提供 PyPTO Toolkit 所支持的服务。
+14.1 This Agreement shall be governed by and construed in accordance with the laws of the People’s Republic of China, without regard to its conflict of laws principles. Any dispute arising out of or in connection with this Agreement that cannot be resolved through friendly negotiation shall be submitted to the exclusive jurisdiction of the competent people’s courts in Shenzhen, Guangdong Province, People’s Republic of China.
 
-13.2 您同意本协议中约定的 PyPTO Toolkit 的出口、再出口可能适用出口管制相关的法律。任何针对 PyPTO Toolkit 或集成 PyPTO Toolkit 的产品的出口、再出口均不得违反上述法律，也不得用于上述法律所禁止的任何目的。
-
-### 14. 一般条款
-
-14.1 本协议应根据中华人民共和国法律解释和管辖而不考虑其冲突法规范。本协议下产生的争议如双方不能友好协商解决，应由中国广东省深圳市有管辖权的法院管辖。
-
-14.2 本协议的某一条款无效、非法或不可执行，双方应尽可能按照原有意图订立修改条款来替代该无效条款，协议中其余条款的效力和执行力不受该无效条款的影响。
+14.2 If any provision of this Agreement is held to be invalid, illegal, or unenforceable, the parties shall negotiate in good faith to replace such provision with a valid provision that most closely approximates the original intent. The remaining provisions shall continue in full force and effect.

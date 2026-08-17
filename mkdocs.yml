@@ -1,0 +1,100 @@
+site_name: PyPTO Toolkit
+site_description: User documentation for the PyPTO 3.0 IDE extension
+site_url: https://www.pypto.ai/pypto-tools/
+
+repo_url: https://github.com/hw-native-sys/pypto-tools
+repo_name: hw-native-sys/pypto-tools
+edit_uri: edit/main/docs/
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+plugins:
+  - search:
+      lang:
+        - en
+        - zh
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: false
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: zh
+          name: 简体中文
+          build: true
+          nav_translations:
+            Home: 首页
+            Getting Started: 开始使用
+            Install the Extension: 安装插件
+            Quick Start: 快速上手
+            Prepare Analysis Files: 准备分析文件
+            Runtime Analysis: 运行时分析
+            Task Dependency Graph: 任务依赖图
+            Function Performance: 函数性能表
+            Compiler Analysis: 编译分析
+
+markdown_extensions:
+  - attr_list
+  - def_list
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+
+validation:
+  links:
+    not_found: warn
+    absolute_links: warn
+    unrecognized_links: warn
+  nav:
+    omitted_files: warn
+    not_found: warn
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Install the Extension: getting-started/install.md
+      - Quick Start: getting-started/quick-start.md
+      - Prepare Analysis Files: getting-started/data-files.md
+  - Runtime Analysis:
+      - Chip Swimlane: runtime/chip-swimlane.md
+      - Task Dependency Graph: runtime/dependency-graph.md
+      - Function Performance: runtime/function-performance.md
+  - Compiler Analysis:
+      - IR Pass Trace: compiler/ir-pass-trace.md
