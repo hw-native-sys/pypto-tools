@@ -57,3 +57,5 @@ The following constraints apply:
 - subsequent filenames must follow `NN_<PassName>.py`;
 - pass numbering must start at 1 and remain consecutive, with no missing or duplicate numbers;
 - a matching `.log` file is optional.
+
+The same pass dump can also be processed by `memory_map` for [Memory Reuse Analysis](../compiler/memory-reuse.md). The analysis uses the pass dump to show the address range and lifetime of each MemRef.

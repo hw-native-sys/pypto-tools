@@ -64,6 +64,7 @@ plugins:
             Task Dependency Graph: 任务依赖图
             Function Performance: 函数性能表
             Compiler Analysis: 编译分析
+            Memory Reuse Analysis: 内存复用分析
 
 markdown_extensions:
   - attr_list
@@ -98,3 +99,4 @@ nav:
       - Function Performance: runtime/function-performance.md
   - Compiler Analysis:
       - IR Pass Trace: compiler/ir-pass-trace.md
+      - Memory Reuse Analysis: compiler/memory-reuse.md

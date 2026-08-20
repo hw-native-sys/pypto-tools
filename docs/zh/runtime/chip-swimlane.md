@@ -4,7 +4,7 @@ Chip Swimlane 用于查看 PyPTO 3.0 任务从调度到 AICore 执行的时序�
 
 ## 打开泳道
 
-在 VS Code 资源管理器中右键泳道 JSON，选择 **PyPTO Toolkit：打开文件**。
+在 VS Code 资源管理器中右键 `chip_swimlane_records.json`，选择 **PyPTO Toolkit：打开文件**。
 
 ![打开 Chip Swimlane](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/1_chip_swim_open.gif)
 

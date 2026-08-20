@@ -10,6 +10,7 @@ PyPTO Toolkit 是面向 PyPTO 算子开发者的 VS Code 插件。本说明聚�
 | 任务依赖图 | `deps.json` | 查看任务、Tensor、前后驱关系和冗余依赖 |
 | 函数性能表 | `name_map*.json` 和同目录泳道文件 | 按函数汇总执行次数及最大、最小、平均耗时 |
 | IR Pass Trace | `passes_dump*` 目录 | 对比连续编译 Pass 前后的 Python IR 快照 |
+| 内存复用分析 | 使用 `memory_map` 处理的 pass dump | 从地址和生命周期两个维度查看片上内存布局与复用 |
 
 [安装插件](getting-started/install.md){ .md-button .md-button--primary }
 [快速上手](getting-started/quick-start.md){ .md-button }
@@ -20,7 +21,7 @@ PyPTO Toolkit 是面向 PyPTO 算子开发者的 VS Code 插件。本说明聚�
 2. 将 PyPTO 3.0 运行生成的 `dfx_outputs` 和 `passes_dump*` 保留在 VS Code 工作区内。
 3. 先打开 `chip_swimlane_records.json` 定位耗时和调度阶段。
 4. 再打开同目录的 `deps.json` 检查任务依赖和冗余边。
-5. 需要定位编译变化时，打开对应的 `passes_dump*` 目录查看 IR Pass Trace。
+5. 需要定位编译变化或使用 `memory_map` 分析内存复用时，打开对应的 `passes_dump*` 目录。
 
 > **文档范围**
 >

@@ -58,3 +58,5 @@ passes_dump_<timestamp>/
 - 后续文件名应符合 `NN_<PassName>.py`；
 - Pass 序号从 1 开始连续，不能缺号或重复；
 - 同名 `.log` 文件可选。
+
+同一个 pass dump 也可以使用 `memory_map` 进行[内存复用分析](../compiler/memory-reuse.md)，查看每个 MemRef 的地址范围和生命周期。

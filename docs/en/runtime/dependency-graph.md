@@ -6,6 +6,8 @@ The Task Dependency Graph reads `tasks`, `edges`, and `tensors` from `deps.json`
 
 In the VS Code Explorer, right-click the file named exactly `deps.json` and select **PyPTO Toolkit: Open File**.
 
+![Open the Task Dependency Graph](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_open_file.gif)
+
 ## Node information
 
 Different shapes and colors distinguish AIC, AIV, MIX, ALLOC, and SPMD tasks. Nodes and the details panel can display:
@@ -16,9 +18,17 @@ Different shapes and colors distinguish AIC, AIV, MIX, ALLOC, and SPMD tasks. No
 - tensor name, dtype, shape, stride, and offset;
 - predecessors, successors, and consolidated counts for identically named SPMD tasks.
 
-## Search and dependency highlighting
+The node style and background color are determined by the AICore type used to execute the task. SPMD tasks use a stacked appearance, with the overlap count shown in the node text. The ports on both sides of a node indicate its in-degree and out-degree.
+
+![Task dependency graph nodes](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_node.png)
+
+## Search, selection, and dependency highlighting
 
 Search by function name or Task ID to locate a task. Hover over or select a node to highlight its predecessors and successors.
+
+Selecting a task node also displays its details in the right-hand panel and highlights the dependency chain containing it. Use the dependency depth number to control how many levels are displayed.
+
+![Task dependency node details](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_node_click.png)
 
 Dependency highlight depth:
 
@@ -41,6 +51,10 @@ The graph supports left-to-right and top-to-bottom layouts, zooming, panning, an
 | Omitted DF | Show only edges classified as redundant by Data Flow rules |
 
 Start with **Full** to verify the original dependencies. Then use **Reduced** or **Reduced DF** to focus on required dependencies. Switch to the corresponding Omitted mode to inspect the source of redundant edges.
+
+You can use the mouse or number keys to switch between edge rendering modes and highlight the edges of interest. Necessary and redundant edges are complementary sets. Standard redundant-dependency analysis assumes that dependencies following an `alloc` cannot be removed; lifetime analysis further determines whether those dependencies can also be removed.
+
+![Redundant dependency analysis](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_omitted_analysis.gif)
 
 ## Early Dispatch markers
 

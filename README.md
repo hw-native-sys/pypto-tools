@@ -22,11 +22,13 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
 
 - **IR Trace Diff:** Compares IR snapshots under a `passes_dump` directory and displays changes introduced by each pass.
 
+- **Memory Reuse Analysis:** `memory_map` renders pass dumps as an interactive HTML map of on-chip memory. The horizontal axis represents addresses, and the vertical axis represents lifetimes from top to bottom. Each tile is shown as a rectangle spanning the bytes occupied by its MemRef horizontally and the statement interval during which it is live vertically, making reuse decisions immediately visible without switching between two tables.
+
 ## Chip Swimlane
 
 - **Open a Swimlane**
 
-  Right-click a swimlane JSON file and select `PyPTO Toolkit: Open File`. The number of views depends on the `--enable-chip-swimlane` collection level. A full record contains the Worker View, Scheduler View, AICPU Scheduler, and AICPU Orchestrator.
+  Right-click the swimlane file `chip_swimlane_records.json` and select `PyPTO Toolkit: Open File`. The number of views depends on the `--enable-chip-swimlane` collection level. A full record contains the Worker View, Scheduler View, AICPU Scheduler, and AICPU Orchestrator.
 
   ![Open a swimlane](./.image/1_chip_swim_open.gif)
 
@@ -98,6 +100,30 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
   | `Alt` + left mouse button | Measure a time interval manually |
   | `w` / `s` (configurable) | Zoom in/out |
   | `a` / `d` (configurable) | Move horizontally |
+
+## Task Dependency Graph
+
+- **Open the Task Dependency Graph**
+
+  Right-click the task dependency file `deps.json` and select `PyPTO Toolkit: Open File`. The graph renders tasks from the actual execution as nodes and uses directed edges to describe dependencies between tasks.
+
+  ![Open the task dependency graph](./.image/deps_open_file.gif)
+
+- **Inspect Node Information**
+
+  As shown in the legend, a node's style and background color are determined by the AICore type used to execute the task. SPMD tasks use a stacked appearance, with the overlap count shown in the node text. The ports on both sides of a node indicate its in-degree and out-degree.
+
+  ![Task dependency graph nodes](./.image/deps_node.png)
+
+  Select a task node to view its details in the right-hand panel and highlight the dependency chain containing it. Use the dependency depth number to control how many levels are displayed. The task dependency graph also supports searching by task name or `task_id`.
+
+  ![Task dependency node details](./.image/deps_node_click.png)
+
+- **Analyze Redundant Dependencies**
+
+  While browsing the task dependency graph, use the mouse or number keys to switch between edge rendering modes and highlight the edges of interest. Necessary and redundant edges are complementary sets. Standard redundant-dependency analysis assumes that dependencies following an `alloc` cannot be removed; lifetime analysis further determines whether those dependencies can also be removed.
+
+  ![Redundant dependency analysis](./.image/deps_omitted_analysis.gif)
 
 ## Pass Records
 

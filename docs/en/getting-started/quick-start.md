@@ -41,9 +41,14 @@ Right-click a directory whose name starts with `passes_dump` and select the IR P
 
 ![Open IR Pass Trace](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/pass_IR_trace.gif)
 
+## 5. Analyze memory reuse
+
+Use `memory_map` with the relevant pass dump to render an interactive HTML map of on-chip memory. The horizontal axis shows addresses, while the vertical axis shows lifetimes from top to bottom. Each tile shows the live interval and the bytes occupied by its MemRef.
+
 ## Next steps
 
 - [Understand the input files](data-files.md)
 - [Analyze a Chip Swimlane](../runtime/chip-swimlane.md)
 - [Analyze a Task Dependency Graph](../runtime/dependency-graph.md)
 - [Use IR Pass Trace](../compiler/ir-pass-trace.md)
+- [Analyze Memory Reuse](../compiler/memory-reuse.md)

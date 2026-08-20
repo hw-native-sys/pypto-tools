@@ -6,6 +6,8 @@
 
 在 VS Code 资源管理器中右键名称精确为 `deps.json` 的文件，选择 **PyPTO Toolkit：打开文件**。
 
+![打开任务依赖图](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_open_file.gif)
+
 
 
 ## 节点信息
@@ -18,9 +20,17 @@
 - Tensor 名称、dtype、shape、stride 和 offset；
 - 前驱、后继及SPMD同名任务归并数量。
 
-## 搜索与依赖高亮
+节点块的样式和背景颜色由执行该任务所使用的 AICore 类型决定。SPMD 任务使用堆叠的显示效果，并在节点文本中显示重叠次数。节点两侧的端口（Port）标识入度和出度。
+
+![任务依赖图节点](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_node.png)
+
+## 搜索、节点选择与依赖高亮
 
 可以按函数名或 Task ID 搜索任务并定位。鼠标悬停或点击节点时，可高亮其前驱和后继。
+
+点击任务节点后，右侧面板会显示任务详细信息，并高亮包含该节点的任务依赖链。通过依赖层级数字可以控制显示的依赖层数。
+
+![任务依赖节点详情](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_node_click.png)
 
 依赖高亮层级：
 
@@ -43,6 +53,10 @@
 | Omitted DF | 只显示按 Data Flow 规则判定为冗余的边 |
 
 建议先用 **Full** 确认原始依赖，再用 **Reduced** 或 **Reduced DF** 聚焦必要依赖；需要检查冗余边来源时切换到相应的 Omitted 模式。
+
+浏览任务依赖图时，可以通过鼠标或键盘数字键切换不同的边渲染模式，并高亮需要关注的边。必要边和冗余边互为补集。普通冗余依赖分析默认 `alloc` 后续的依赖连线不可删除；生命周期分析会进一步判断这些依赖连线是否也可以删除。
+
+![冗余依赖分析](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_omitted_analysis.gif)
 
 ## Early Dispatch 标记
 

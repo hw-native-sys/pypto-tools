@@ -47,6 +47,8 @@ The left pane lists passes by number and reports added and removed line counts. 
 1. Enable the **Changed** filter to find passes that actually modify the IR;
 2. filter by function to focus on the current operator entry point or a suspicious function.
 
+For an interactive view of on-chip memory reuse in a pass dump, see [Memory Reuse Analysis](memory-reuse.md).
+
 > **Note**
 >
 > IR Pass Trace is a read-only viewer. It does not edit or write back to files in `passes_dump`.

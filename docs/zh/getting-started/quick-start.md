@@ -41,9 +41,14 @@ build_out/
 
 ![打开 IR Pass Trace](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/pass_IR_trace.gif)
 
+## 5. 分析内存复用
+
+使用 `memory_map` 处理对应的 pass dump，可以生成交互式的片上内存 HTML 地图。横轴显示地址，纵轴向下显示生命周期；每个 tile 展示其 MemRef 占用的字节范围和存活区间。
+
 ## 下一步
 
 - [了解各输入文件之间的关系](data-files.md)
 - [分析 Chip Swimlane](../runtime/chip-swimlane.md)
 - [分析任务依赖图](../runtime/dependency-graph.md)
 - [使用 IR Pass Trace](../compiler/ir-pass-trace.md)
+- [分析内存复用](../compiler/memory-reuse.md)

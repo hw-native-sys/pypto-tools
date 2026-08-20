@@ -4,7 +4,7 @@ Chip Swimlane shows the timeline of PyPTO 3.0 tasks from scheduling through AICo
 
 ## Open a swimlane
 
-In the VS Code Explorer, right-click the swimlane JSON file and select **PyPTO Toolkit: Open File**.
+In the VS Code Explorer, right-click `chip_swimlane_records.json` and select **PyPTO Toolkit: Open File**.
 
 ![Open Chip Swimlane](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/1_chip_swim_open.gif)
 

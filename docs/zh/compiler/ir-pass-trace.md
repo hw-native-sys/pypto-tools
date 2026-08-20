@@ -47,6 +47,8 @@ passes_dump_<timestamp>/
 1. 先启用 **Changed** 过滤，快速找到真正修改 IR 的 Pass；
 2. 按函数过滤，聚焦当前算子入口或可疑函数；
 
+如需查看 pass dump 中片上内存的复用情况，请参阅[内存复用分析](memory-reuse.md)。
+
 > **说明**
 >
 > IR Pass Trace 是只读预览工具，不会编辑或回写 `passes_dump` 文件。

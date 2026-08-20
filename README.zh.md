@@ -19,12 +19,14 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
 ### pypto pass 记录：
 - **IR trace diff：**  比对`passes_dump`目录下的IR前后记录，显示变化。
+- **内存复用分析：**  `memory_map` 将 pass dump 渲染成一张交互式的片上内存 HTML 地图：**横轴是地址，
+纵轴向下是生命周期**。每个 tile 画成一个矩形，横向覆盖它的 MemRef 所占的字节，纵向覆盖它存活的语句区间——复用（reuse）决策一眼可见，不必在两张表之间来回对照。
 
 ## chip泳道图
 
 - **打开泳道图**
 
-  在泳道图 json 文件上右键选择`PyPTO Toolkit: 打开文件`即可打开。根据采集时设置的`--enable-chip-swimlane`的等级，打开的图中会出现对应数量的view。全量采集的泳道图包含：Worker View、Scheduler View、AICPU Scheduler和AICPU Orchestrator。
+  右键泳道图文件`chip_swimlane_records.json`，选择`PyPTO Toolkit: 打开文件`即可。根据采集时设置的`--enable-chip-swimlane`的等级，打开的图中会出现对应数量的view。全量采集的泳道图包含：Worker View、Scheduler View、AICPU Scheduler和AICPU Orchestrator。
 
     ![image](./.image/1_chip_swim_open.gif)
 
@@ -104,10 +106,30 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
   | w / s（支持在配置页面配置） | 放大 / 缩小  |
   | a / d（支持在配置页面配置） | 横向移动     |
 
+## 任务依赖图
+- **打开任务依赖图**
+
+  右键任务依赖文件`deps.json`，选择`PyPTO Toolkit: 打开文件`即可。任务依赖图会将真实执行过程中的任务绘制为节点，并用带方向的连线描述任务之间的依赖关系。
+  ![image](./.image/deps_open_file.gif)
+
+- **任务依赖图中的节点信息**
+
+  如图例说明所示，节点块（Node）的样式和背景颜色由执行该任务所使用的AICore类型决定，SPMD任务则会使用堆叠的显示效果并在节点块内的文本中说明重叠次数。节点块两侧的端口（Port）中标识入度和出度。
+  ![image](./.image/deps_node.png)
+
+  单击一个任务节点时候，会在右侧窗口中显示任务的详细信息，并高亮出其所在的任务依赖链。显示的依赖层级通过数字可控制。任务依赖图中同样支持按任务名称或者task_id搜索。
+  ![image](./.image/deps_node_click.png)
+
+- **冗余依赖分析**
+
+  浏览任务依赖图的时候可以通过鼠标选择或者键盘数字键切换不同的边渲染模式，高亮想要突出显示的边。必要边和冗余边互为补集。普通的冗余边分析会默认alloc的后续依赖连线是不可以删除的，而分析生命周期的方法将进一步分析这种依赖连线是否可以删除。
+  ![image](./.image/deps_omitted_analysis.gif)
+
 
 ## PASS记录
 
 - **打开IR Trace**
+
   右键pass输出文件夹`passes_dump`，可以使用工具查看PASS阶段里各个IR变化。可以按照是否有更改内容显示哪些PASS阶段。可以按函数过滤显示变更内容。
   ![image](./.image/pass_IR_trace.gif)
 
