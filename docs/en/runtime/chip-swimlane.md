@@ -49,12 +49,6 @@ You can add markers on the time axis. You can also right-click a task to draw ma
 
 ![Mark SPMD task boundaries](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/6_chip_swim_set_spmd_line.gif)
 
-## Performance panel
-
-Select **Performance Statistics** in the upper-right corner to inspect duration and setup statistics. Selecting a task in the statistics locates the corresponding record in the swimlane.
-
-![Performance panel](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/7_chip_swim_perf.png)
-
 ## Setup analysis
 
 For records that include receive-to-start data, the extension treats the interval from receive to start as local setup:
@@ -68,15 +62,47 @@ For records that include receive-to-start data, the extension treats the interva
 
 ![Configure setup display](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/9_chip_swim_show_setup.gif)
 
-## Critical-path highlighting
+## Performance analysis panel
 
-When `CPM_static*.json` or `CPM_observed*.json` exists in the same directory, you can select a critical path in the rendering settings. Tasks outside the selected critical path are de-emphasized so you can focus on the main execution chain.
+Select **Performance Statistics** in the upper-right corner to open the performance analysis panel. The panel provides an overview, per-kernel statistics, and several tuning analyses. Selecting a task or task path in the statistics locates and highlights the corresponding records in the swimlane.
 
-![Highlight a critical path](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/10_chip_swim_show_CPM.gif)
+### Overview and per-kernel statistics
+
+The overview lists key information from the swimlane. Per-kernel statistics group kernels by `func_id` and report the invocation count and the maximum, minimum, and average duration of a single invocation. Each duration runs from `start` to `end` and excludes setup time. Select the icon next to a column header to sort the table by that column.
+
+![Overview and per-kernel statistics](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_performance_statistics.gif)
+
+### Continuous single-dependency analysis
+
+If a task has exactly one predecessor and that predecessor has only this task as its successor, the two tasks may be candidates for merging to reduce scheduling overhead. **Continuous Single-Dependency Analysis** lists task chains that meet these conditions. Select a task path in the table to highlight the chain in the Worker View and de-emphasize all other tasks.
+
+![Continuous single-dependency analysis](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_continuous_single_dep.gif)
+
+### Critical-path analysis
+
+The critical-path analysis script in the `simpler` repository generates `CPM_static*.json` or `CPM_observed*.json` under `dfx_outputs`. After you select a result, the Worker View highlights tasks on the path and de-emphasizes all other tasks.
+
+![Critical-path analysis](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_critical_path.gif)
 
 > **Important**
 >
 > The extension only reads and highlights existing CPM results. It does not calculate or generate a critical-path report in the IDE.
+
+#### Gap and Blocker Analysis
+
+**Gap and Blocker Analysis** parses an observed critical path and examines the preceding gap for every task on the path. It identifies whether each gap is caused by another task blocking the same core or by the current task waiting for a predecessor to finish. You can set a gap threshold; preceding gaps above the threshold are displayed in red.
+
+![Gap and Blocker Analysis](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_critical_analysis.gif)
+
+In the analysis table, right-click a task record and select **Draw Preceding Gap** to mark the gap's start and end. The labeled time markers help you locate the tasks around the gap in the Worker View.
+
+![Draw a preceding gap](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_critical_draw_gap.gif)
+
+### Early Dispatch analysis
+
+This analysis finds target tasks that match the Early Dispatch configuration and checks whether they were dispatched before the last `FIN` event among their predecessors. Right-click a task record and select **Draw Maximum Lead** to mark the start and end of the maximum lead interval. The labeled time markers help you locate that interval in the Scheduler View.
+
+![Early Dispatch analysis](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_early_dispatch_gap.gif)
 
 ## Other operations
 

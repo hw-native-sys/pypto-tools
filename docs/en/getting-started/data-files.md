@@ -7,6 +7,7 @@ PyPTO Toolkit does not collect or generate PyPTO runtime records. It reads files
 | File | Opens independently | Purpose |
 |---|---:|---|
 | `chip_swimlane_records.json` | Yes | Provides task, core, scheduler, orchestrator, and timing information |
+| `serving-strace-swimlane.json` | Yes | Provides the Serving task timeline and aggregates task count and duration by `WorkerProcess` |
 | `deps.json` | Yes | Provides the task DAG, tensor information, and swimlane dependency lines |
 | `name_map*.json` | Conditional | Maps Func IDs to function names and generates function performance data with a swimlane file |
 | `CPM_static*.json` | No | Provides tasks from an existing static critical-path result |
@@ -22,6 +23,8 @@ dfx_outputs/
 ├── CPM_static.json             # optional
 └── CPM_observed.json           # optional
 ```
+
+`serving-strace-swimlane.json` opens independently and does not require the related Chip Swimlane files listed above.
 
 When you open a swimlane file, the extension looks for `deps.json` and `name_map*.json` in the same directory:
 

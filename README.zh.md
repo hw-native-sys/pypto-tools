@@ -88,13 +88,6 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
   ![image](./.image/9_chip_swim_show_setup.gif)
 
-- **关键路径显示**
-
-  使用仓库内的关键路径方法工具会在 `dfx_outputs` 目录下生成 `CPM_observed.json` 和 `CPM_static.json`。点击右上角的的`渲染配置`按钮打开配置面板，可以选择对应的关键路径预览。泳道图的Worker view中会让非关键路径上的任务失去彩色着色并让其不可被选中
-
-  ![image](./.image/10_chip_swim_show_CPM.gif)
-
-
 - **快捷键列表**
 
   | 快捷键                      | 功能描述     |
@@ -105,6 +98,43 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
   | 鼠标左键 + ALT              | 手动测距     |
   | w / s（支持在配置页面配置） | 放大 / 缩小  |
   | a / d（支持在配置页面配置） | 横向移动     |
+
+## chip泳道图性能分析面板
+- **概览与按kernel统计**
+
+  概览中罗列了一些泳道图中的关键信息。按kernel统计会逐func_id统计kernel执行的次数、单次执行的最大耗时（从start到end，无setup时长）、最小耗时和平均耗时，形成表格。该表格支持单击表头旁的图标进行表格内容排序。
+  ![image](./.image/chip_swim_performance_statistics.gif)
+
+- **连续单依赖分析**
+
+  若当前任务只有一个入度，且该前驱任务也只有这一个出度（当前任务），我们可以尝试将两个任务合并为一个，从而减少调度开销。使用`连续单依赖分析`，会在表格中统计出满足条件的任务链。单击表格中的任务路径，将在泳道图worker view中高亮显示出该链，并将其他任务着色退化。
+  ![image](./.image/chip_swim_continuous_single_dep.gif)
+
+
+- **关键路径分析**
+
+  使用simpler仓库内的关键路径方法工具脚本会在 `dfx_outputs` 目录下生成 `CPM_observed.json` 和 `CPM_static.json`。可以选择对应的关键路径预览。泳道图的Worker view中会高亮关键路径上的任务，并让其他任务着色退化。
+
+  ![image](./.image/chip_swim_critical_path.gif)
+
+  使用`间隙与Blocker分析`，可以解析观测关键路径，梳理路径上的每一个任务的前置间隙，并标识出这里的间隙是来自同一个core上有其他任务阻塞了，还是当前正在等待自己所依赖的前序任务完成。可以指定间隙阈值，超过阈值的前置间隙将以红色显示。
+  ![image](./.image/chip_swim_critical_analysis.gif)
+
+  在`间隙与Blocker分析`表格中，右键单击任务记录行，可以选择`绘制前置间隙`的始末时间点。打点的时间线会自带标签，帮助在Worker View中定位该间隙前后的任务。
+  ![image](./.image/chip_swim_critical_draw_gap.gif)
+
+- **Early Dispatch分析**
+
+  统计满足Early Dispatch配置条件的目标任务，会确认这些任务是否在其前序任务最后的FIN之前dispatch。同样支持右键单击任务记录行，选择`绘制最大提前`的始末时间点。打点的时间线会自带标签，帮助在Scheduler View中定位该最大提前量。
+  ![image](./.image/chip_swim_early_dispatch_gap.gif)
+
+## serving-strace-swimlane
+
+- **打开serving-strace-swimlane**
+
+  现在支持打开serving-strace-swimlane.json文件，并在其性能面板中统计WorkerProcess中的任务数量、平均耗时、最大耗时和最小耗时。
+  ![image](./.image//serving-strace-swimlane_open.gif)
+
 
 ## 任务依赖图
 - **打开任务依赖图**

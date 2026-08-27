@@ -84,12 +84,6 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
 
   ![Configure setup display](./.image/9_chip_swim_show_setup.gif)
 
-- **Highlight a Critical Path**
-
-  The critical-path analysis tool generates `CPM_observed.json` and `CPM_static.json` under `dfx_outputs`. Open **Rendering Settings** and select the required critical-path result. In the Worker View, tasks outside the critical path lose their color and cannot be selected.
-
-  ![Highlight a critical path](./.image/10_chip_swim_show_CPM.gif)
-
 - **Keyboard and Mouse Shortcuts**
 
   | Shortcut | Function |
@@ -100,6 +94,48 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
   | `Alt` + left mouse button | Measure a time interval manually |
   | `w` / `s` (configurable) | Zoom in/out |
   | `a` / `d` (configurable) | Move horizontally |
+
+## Chip Swimlane Performance Analysis Panel
+
+- **Overview and Per-Kernel Statistics**
+
+  The overview lists key information from the swimlane. Per-kernel statistics group kernels by `func_id` and report the invocation count and the maximum, minimum, and average duration of a single invocation. Each duration runs from `start` to `end` and excludes setup time. Select the icon next to a column header to sort the table by that column.
+
+  ![View overview and per-kernel statistics](./.image/chip_swim_performance_statistics.gif)
+
+- **Continuous Single-Dependency Analysis**
+
+  If a task has exactly one predecessor and that predecessor has only this task as its successor, the two tasks may be candidates for merging to reduce scheduling overhead. **Continuous Single-Dependency Analysis** lists task chains that meet these conditions. Select a task path in the table to highlight the chain in the swimlane's Worker View and de-emphasize all other tasks.
+
+  ![Analyze continuous single-dependency chains](./.image/chip_swim_continuous_single_dep.gif)
+
+- **Critical-Path Analysis**
+
+  The critical-path analysis script in the `simpler` repository generates `CPM_observed.json` and `CPM_static.json` under `dfx_outputs`. Select the required critical path to preview it. The Worker View highlights tasks on the path and de-emphasizes all other tasks.
+
+  ![Analyze a critical path](./.image/chip_swim_critical_path.gif)
+
+  **Gap and Blocker Analysis** parses an observed critical path and examines the preceding gap for every task on the path. It identifies whether each gap is caused by another task blocking the same core or by the current task waiting for a predecessor to finish. You can set a gap threshold; preceding gaps above the threshold are displayed in red.
+
+  ![Analyze critical-path gaps and blockers](./.image/chip_swim_critical_analysis.gif)
+
+  In the **Gap and Blocker Analysis** table, right-click a task record and select **Draw Preceding Gap** to mark the gap's start and end. The labeled time markers help you locate the tasks around the gap in the Worker View.
+
+  ![Draw a preceding gap](./.image/chip_swim_critical_draw_gap.gif)
+
+- **Early Dispatch Analysis**
+
+  This analysis finds target tasks that match the Early Dispatch configuration and checks whether they were dispatched before the last `FIN` event among their predecessors. You can also right-click a task record and select **Draw Maximum Lead** to mark the start and end of the maximum lead interval. The labeled time markers help you locate that interval in the Scheduler View.
+
+  ![Analyze Early Dispatch lead time](./.image/chip_swim_early_dispatch_gap.gif)
+
+## Serving Strace Swimlane
+
+- **Open a Serving Strace Swimlane**
+
+  The extension can now open `serving-strace-swimlane.json`. Its performance panel reports the task count and the average, maximum, and minimum task duration for each `WorkerProcess`.
+
+  ![Open a Serving Strace Swimlane](./.image/serving-strace-swimlane_open.gif)
 
 ## Task Dependency Graph
 

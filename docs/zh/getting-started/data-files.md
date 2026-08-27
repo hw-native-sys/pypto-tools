@@ -7,6 +7,7 @@ PyPTO Toolkit 不负责采集或生成 PyPTO 运行记录；它负责读取框�
 | 文件 | 能否独立打开 | 作用 |
 |---|---:|---|
 | `chip_swimlane_records.json` | 是 | 提供任务、Core、Scheduler、Orchestrator 和时间信息 |
+| `serving-strace-swimlane.json` | 是 | 提供 Serving 任务时序，并按 `WorkerProcess` 汇总任务数量和耗时 |
 | `deps.json` | 是 | 提供任务 DAG、Tensor 信息和泳道依赖连线 |
 | `name_map*.json` | 有条件 | 提供 Func ID 到函数名的映射，并结合泳道生成函数性能表 |
 | `CPM_static*.json` | 否 | 为泳道提供已经计算出的静态关键路径任务 |
@@ -22,6 +23,8 @@ dfx_outputs/
 ├── CPM_static.json             # 可选
 └── CPM_observed.json           # 可选
 ```
+
+`serving-strace-swimlane.json` 可以独立打开，不依赖上述 Chip Swimlane 关联文件。
 
 打开泳道文件时，插件会尝试读取同目录中的 `deps.json` 和 `name_map*.json`：
 

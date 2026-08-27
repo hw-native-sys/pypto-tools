@@ -50,12 +50,6 @@ Chip Swimlane 用于查看 PyPTO 3.0 任务从调度到 AICore 执行的时序�
 ![标记 SPMD 任务边界](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/6_chip_swim_set_spmd_line.gif)
 
 
-## 性能面板
-
-点击右上角的 **性能统计**，可以查看耗时和 Setup 相关统计。从统计项点击任务时，泳道会定位到对应记录。
-
-![性能面板](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/7_chip_swim_perf.png)
-
 ## Setup 分析
 
 对于包含 receive-to-start 数据的记录，插件将 receive → start 识别为本地 Setup：
@@ -69,16 +63,47 @@ Chip Swimlane 用于查看 PyPTO 3.0 任务从调度到 AICore 执行的时序�
 
 ![配置 Setup 显示](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/9_chip_swim_show_setup.gif)
 
-## 关键路径高亮
+## 性能分析面板
 
-当同目录存在 `CPM_static*.json` 或 `CPM_observed*.json` 时，可在渲染配置中选择关键路径。非关键路径任务会被弱化，以便聚焦主要执行链。
+点击右上角的 **性能统计** 打开性能分析面板。面板提供总体统计、按 Kernel 统计和多种调优分析；从统计项选择任务或任务路径时，泳道会定位并高亮对应记录。
 
-![关键路径高亮](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/10_chip_swim_show_CPM.gif)
+### 概览与按 Kernel 统计
+
+概览罗列泳道图中的关键信息。按 Kernel 统计以 `func_id` 分组，展示 Kernel 执行次数，以及单次执行的最大、最小和平均耗时。单次耗时按 `start` 到 `end` 计算，不包含 Setup 时长。点击表头旁的图标，可以按对应列排序。
+
+![概览与按 Kernel 统计](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_performance_statistics.gif)
+
+### 连续单依赖分析
+
+如果一个任务只有一个入度，且它的前驱任务也只有这一个出度（即当前任务），可以考虑合并两个任务以减少调度开销。**连续单依赖分析** 会在表格中列出满足条件的任务链。点击表格中的任务路径，会在 Worker View 中高亮整条链，并弱化其他任务的着色。
+
+![连续单依赖分析](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_continuous_single_dep.gif)
+
+### 关键路径分析
+
+`simpler` 仓库中的关键路径分析脚本会在 `dfx_outputs` 目录下生成 `CPM_static*.json` 或 `CPM_observed*.json`。选择相应结果后，Worker View 会高亮关键路径上的任务，并弱化其他任务的着色。
+
+![关键路径分析](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_critical_path.gif)
 
 > **重要说明**
 >
 > 插件只读取并高亮已有 CPM 结果，不会在 IDE 内计算或生成关键路径报告。
 
+#### 间隙与 Blocker 分析
+
+**间隙与 Blocker 分析** 会解析观测关键路径，梳理路径中每个任务的前置间隙，并判断间隙来自同一 Core 上的其他任务阻塞，还是来自当前任务等待其前驱任务完成。可以指定间隙阈值，超过阈值的前置间隙会以红色显示。
+
+![间隙与 Blocker 分析](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_critical_analysis.gif)
+
+在分析表格中右键任务记录行并选择 **绘制前置间隙**，可以标记间隙的开始和结束时间。参考线自带标签，便于在 Worker View 中定位间隙前后的任务。
+
+![绘制前置间隙](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_critical_draw_gap.gif)
+
+### Early Dispatch 分析
+
+该分析统计符合 Early Dispatch 配置条件的目标任务，并检查它们是否在所有前驱任务中最后一个 `FIN` 事件之前完成 dispatch。右键任务记录行并选择 **绘制最大提前**，可以标记最大提前区间的开始和结束时间。参考线自带标签，便于在 Scheduler View 中定位该区间。
+
+![Early Dispatch 分析](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/chip_swim_early_dispatch_gap.gif)
 
 
 ## 其他操作

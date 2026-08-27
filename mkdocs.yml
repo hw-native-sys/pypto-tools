@@ -61,6 +61,7 @@ plugins:
             Quick Start: 快速上手
             Prepare Analysis Files: 准备分析文件
             Runtime Analysis: 运行时分析
+            Serving Strace Swimlane: Serving Strace 泳道
             Task Dependency Graph: 任务依赖图
             Function Performance: 函数性能表
             Compiler Analysis: 编译分析
@@ -95,6 +96,7 @@ nav:
       - Prepare Analysis Files: getting-started/data-files.md
   - Runtime Analysis:
       - Chip Swimlane: runtime/chip-swimlane.md
+      - Serving Strace Swimlane: runtime/serving-strace-swimlane.md
       - Task Dependency Graph: runtime/dependency-graph.md
       - Function Performance: runtime/function-performance.md
   - Compiler Analysis:
