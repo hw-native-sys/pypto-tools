@@ -1,3 +1,5 @@
+INHERIT: .site-theme/docs-theme/base.yml
+
 site_name: PyPTO Toolkit
 site_description: User documentation for the PyPTO 3.0 IDE extension
 site_url: https://www.pypto.ai/pypto-tools/
@@ -9,32 +11,15 @@ edit_uri: edit/main/docs/
 docs_dir: docs
 site_dir: site
 
+exclude_docs: |
+  theme-revision.txt
+
 theme:
-  name: material
+  custom_dir: .site-theme/docs-theme/overrides
   language: en
-  features:
-    - navigation.tabs
-    - navigation.sections
-    - navigation.indexes
-    - navigation.top
-    - content.code.copy
-    - content.action.edit
-    - search.suggest
-    - search.highlight
-    - toc.follow
-  palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+
+extra:
+  pypto_project: pypto-tools
 
 plugins:
   - search:

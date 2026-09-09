@@ -1,4 +1,7 @@
+# The shared theme supplies the tested MkDocs/Material versions.
+-c .site-theme/docs-theme/constraints.txt
+
 mkdocs>=1.6,<2
-mkdocs-material>=9.5,<9.7.2
+mkdocs-material>=9.5,<10
 mkdocs-static-i18n>=1.2,<2
 jieba>=0.42.1,<1
