@@ -4,7 +4,7 @@ Serving Strace Swimlane 用于查看 `serving-strace-swimlane.json` 中记录的
 
 ## 打开泳道
 
-在 VS Code 资源管理器中右键 `serving-strace-swimlane.json`，选择 **PyPTO Toolkit：打开文件**。
+在 VS Code 资源管理器中右键 `serving-strace-swimlane.json`，选择 **PyPTO3 Toolkit：打开文件**。
 
 ![打开 Serving Strace Swimlane](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/serving-strace-swimlane_open.gif)
 

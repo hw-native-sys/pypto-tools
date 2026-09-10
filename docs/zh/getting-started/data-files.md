@@ -1,6 +1,6 @@
 # 准备分析文件
 
-PyPTO Toolkit 不负责采集或生成 PyPTO 运行记录；它负责读取框架已经输出的文件并提供可视化。输入文件越完整，可展示的信息越丰富。
+PyPTO3 Toolkit 不负责采集或生成 PyPTO 运行记录；它负责读取框架已经输出的文件并提供可视化。输入文件越完整，可展示的信息越丰富。
 
 ## 运行时文件
 
@@ -62,4 +62,4 @@ passes_dump_<timestamp>/
 - Pass 序号从 1 开始连续，不能缺号或重复；
 - 同名 `.log` 文件可选。
 
-同一个 pass dump 也可以使用 `memory_map` 进行[内存复用分析](../compiler/memory-reuse.md)，查看每个 MemRef 的地址范围和生命周期。
+同一个 pass dump 中匹配 `*after_AllocateMemoryAddr.py` 的文件可以直接用于[内存复用分析](../compiler/memory-reuse.md)，查看每个 MemRef 的地址范围和生命周期。

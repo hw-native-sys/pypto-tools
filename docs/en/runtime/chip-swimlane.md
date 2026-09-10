@@ -4,7 +4,7 @@ Chip Swimlane shows the timeline of PyPTO 3.0 tasks from scheduling through AICo
 
 ## Open a swimlane
 
-In the VS Code Explorer, right-click `chip_swimlane_records.json` and select **PyPTO Toolkit: Open File**.
+In the VS Code Explorer, right-click `chip_swimlane_records.json` and select **PyPTO3 Toolkit: Open File**.
 
 ![Open Chip Swimlane](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/1_chip_swim_open.gif)
 
@@ -14,10 +14,10 @@ The extension creates views based on the data actually present in the input file
 |---|---|
 | Worker View | Shows task start time, end time, and duration on each AIC/AIV core |
 | Scheduler View | Shows AICPU scheduling intervals from dispatch to finish |
-| Scheduler Phase | Shows phases such as dispatch, early_dispatch, wire, release, resolve, and drain |
-| Orchestrator Phase | Shows orchestrator submission phases and their relationship with the scheduler |
+| AICPU Scheduler | Shows phases such as dispatch, early_dispatch, wire, release, resolve, and drain |
+| AICPU Orchestrator | Shows orchestrator submission phases and their relationship with the scheduler |
 
-A low record level does not infer higher-level scheduling data. For example, a file containing only worker tasks does not produce a complete Scheduler Phase view.
+For the TensorMap and RingBuffer runtime, a full record contains all four views listed above. A low record level does not infer higher-level scheduling data. For example, a file containing only worker tasks does not produce a complete AICPU Scheduler view.
 
 ## Inspect task details and dependencies
 
@@ -64,7 +64,7 @@ For records that include receive-to-start data, the extension treats the interva
 
 ## Performance analysis panel
 
-Select **Performance Statistics** in the upper-right corner to open the performance analysis panel. The panel provides an overview, per-kernel statistics, and several tuning analyses. Selecting a task or task path in the statistics locates and highlights the corresponding records in the swimlane.
+Select **Performance Analysis** in the upper-right corner to open the performance analysis panel. The panel provides an overview, per-kernel statistics, and several tuning analyses. Selecting a task or task path in the statistics locates and highlights the corresponding records in the swimlane.
 
 ### Overview and per-kernel statistics
 

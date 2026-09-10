@@ -25,7 +25,7 @@ Keep related files in the same directory whenever possible. The extension automa
 
 ## 2. Inspect the runtime swimlane
 
-In the Explorer, right-click `chip_swimlane_records.json` and select **PyPTO Toolkit: Open File**. The extension creates worker, scheduler, and orchestrator views based on the records actually present in the file.
+In the Explorer, right-click `chip_swimlane_records.json` and select **PyPTO3 Toolkit: Open File**. The extension creates worker, scheduler, and orchestrator views based on the records actually present in the file.
 
 ![Open Chip Swimlane](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/1_chip_swim_open.gif)
 
@@ -47,7 +47,7 @@ Right-click a directory whose name starts with `passes_dump` and select the IR P
 
 ## 6. Analyze memory reuse
 
-Use `memory_map` with the relevant pass dump to render an interactive HTML map of on-chip memory. The horizontal axis shows addresses, while the vertical axis shows lifetimes from top to bottom. Each tile shows the live interval and the bytes occupied by its MemRef.
+Right-click a file matching `*after_AllocateMemoryAddr.py` in the relevant pass dump and select **PyPTO3 Toolkit: Open Memory Reuse Analyzer**. You can also select **openMemoryMap** in the upper-right corner of a Chip Swimlane preview. The horizontal axis shows addresses, while the vertical axis shows lifetimes from top to bottom.
 
 ## Next steps
 

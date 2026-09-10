@@ -1,6 +1,6 @@
-# PyPTO Toolkit User Guide
+# PyPTO3 Toolkit User Guide
 
-PyPTO Toolkit is a VS Code extension for PyPTO operator developers. This guide focuses on the runtime and compilation visualization features provided for **PyPTO 3.0**. These features help you inspect task timelines, analyze task dependencies, and identify IR changes introduced by compiler passes.
+PyPTO3 Toolkit v1.0.0 is a VS Code extension for PyPTO operator developers. This guide focuses on the runtime and compilation visualization features provided for **PyPTO 3.0**. These features help you inspect task timelines, analyze task dependencies, and identify IR changes introduced by compiler passes.
 
 ## Key features
 
@@ -11,7 +11,7 @@ PyPTO Toolkit is a VS Code extension for PyPTO operator developers. This guide f
 | Task Dependency Graph | `deps.json` | Inspect tasks, tensors, predecessor and successor relationships, and redundant dependencies |
 | Function Performance | `name_map*.json` and a swimlane file in the same directory | Aggregate invocation count and maximum, minimum, and average duration by function |
 | IR Pass Trace | A `passes_dump*` directory | Compare consecutive Python IR snapshots before and after compiler passes |
-| Memory Reuse Analysis | A pass dump processed by `memory_map` | Inspect on-chip memory placement and reuse across address and lifetime |
+| Memory Reuse Analysis | A `*after_AllocateMemoryAddr.py` file in a pass dump | Inspect on-chip memory placement and reuse across address and lifetime |
 
 [Install the extension](getting-started/install.md){ .md-button .md-button--primary }
 [Quick start](getting-started/quick-start.md){ .md-button }
@@ -23,7 +23,7 @@ PyPTO Toolkit is a VS Code extension for PyPTO operator developers. This guide f
 3. Open `chip_swimlane_records.json` first to locate expensive tasks and scheduling phases.
 4. Open `deps.json` in the same directory to inspect task dependencies and redundant edges.
 5. If the output includes `serving-strace-swimlane.json`, open it to compare task count and duration across `WorkerProcess` instances.
-6. Open the corresponding `passes_dump*` directory when you need to identify compiler changes or analyze memory reuse with `memory_map`.
+6. To analyze memory reuse, open a matching `*after_AllocateMemoryAddr.py` file directly or use **openMemoryMap** from a Chip Swimlane preview.
 
 > **Documentation scope**
 >

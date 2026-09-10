@@ -1,6 +1,6 @@
 # 安装插件
 
-PyPTO Toolkit 以 VSIX 文件随 GitHub Release 发布。建议始终从官方 Release 页面获取插件，不要使用来源不明的安装包。
+PyPTO3 Toolkit 以 VSIX 文件随 GitHub Release 发布。建议始终从官方 Release 页面获取插件，不要使用来源不明的安装包。
 
 ## 下载
 
@@ -26,9 +26,9 @@ code --install-extension /path/to/pypto-toolkit-<version>.vsix
 
 安装后可进行以下检查：
 
-- 在扩展列表中能找到 **PyPTO Toolkit**，并可以确认版本号是否正确；
-- 打开命令面板后，能够搜索到以 `PyPTO Toolkit` 开头的命令；
-- 在资源管理器中右键受支持的 JSON 文件或 `passes_dump*` 目录时，能够看到 PyPTO Toolkit 的打开入口。
+- 在扩展列表中能找到 **PyPTO3 Toolkit**，并可以确认版本号是否正确；
+- 打开命令面板后，能够搜索到以 `PyPTO3 Toolkit` 开头的命令；
+- 在资源管理器中右键受支持的 JSON 文件或 `passes_dump*` 目录时，能够看到 PyPTO3 Toolkit 的打开入口。
 
 ## 升级
 
@@ -38,4 +38,4 @@ code --install-extension /path/to/pypto-toolkit-<version>.vsix
 
 > **注意：保持 VS Code 显示比例不变**
 >
-> 打开 PyPTO Toolkit 功能视图后，不建议调整 VS Code 窗口的显示缩放比例，否则可能出现视图布局或渲染异常。
+> 打开 PyPTO3 Toolkit 功能视图后，不建议调整 VS Code 窗口的显示缩放比例，否则可能出现视图布局或渲染异常。

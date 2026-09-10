@@ -4,7 +4,7 @@ Chip Swimlane 用于查看 PyPTO 3.0 任务从调度到 AICore 执行的时序�
 
 ## 打开泳道
 
-在 VS Code 资源管理器中右键 `chip_swimlane_records.json`，选择 **PyPTO Toolkit：打开文件**。
+在 VS Code 资源管理器中右键 `chip_swimlane_records.json`，选择 **PyPTO3 Toolkit：打开文件**。
 
 ![打开 Chip Swimlane](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/1_chip_swim_open.gif)
 
@@ -14,10 +14,10 @@ Chip Swimlane 用于查看 PyPTO 3.0 任务从调度到 AICore 执行的时序�
 |---|---|
 | Worker View | 展示任务在 AIC/AIV Core 上的开始、结束和执行时长 |
 | Scheduler View | 展示 AICPU 从 dispatch 到 finish 的调度区间 |
-| Scheduler Phase | 展示 dispatch、early_dispatch、wire、release、resolve、drain 等阶段 |
-| Orchestrator Phase | 展示 Orchestrator 提交阶段及其与 Scheduler 的关联 |
+| AICPU Scheduler | 展示 dispatch、early_dispatch、wire、release、resolve、drain 等阶段 |
+| AICPU Orchestrator | 展示 Orchestrator 提交阶段及其与 Scheduler 的关联 |
 
-低记录级别不会凭空推导高级调度信息。例如，只包含 Worker 任务的文件不会生成完整 Scheduler Phase。
+对于 TensorMap 和 RingBuffer runtime，全量采集的记录包含以上四个视图。低记录级别不会凭空推导高级调度信息。例如，只包含 Worker 任务的文件不会生成完整 AICPU Scheduler 视图。
 
 ## 查看任务详情与依赖
 
@@ -65,7 +65,7 @@ Chip Swimlane 用于查看 PyPTO 3.0 任务从调度到 AICore 执行的时序�
 
 ## 性能分析面板
 
-点击右上角的 **性能统计** 打开性能分析面板。面板提供总体统计、按 Kernel 统计和多种调优分析；从统计项选择任务或任务路径时，泳道会定位并高亮对应记录。
+点击右上角的 **性能分析** 打开性能分析面板。面板提供总体统计、按 Kernel 统计和多种调优分析；从统计项选择任务或任务路径时，泳道会定位并高亮对应记录。
 
 ### 概览与按 Kernel 统计
 

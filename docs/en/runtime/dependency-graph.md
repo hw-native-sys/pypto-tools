@@ -4,7 +4,7 @@ The Task Dependency Graph reads `tasks`, `edges`, and `tensors` from `deps.json`
 
 ## Open the graph
 
-In the VS Code Explorer, right-click the file named exactly `deps.json` and select **PyPTO Toolkit: Open File**.
+In the VS Code Explorer, right-click the file named exactly `deps.json` and select **PyPTO3 Toolkit: Open File**.
 
 ![Open the Task Dependency Graph](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_open_file.gif)
 

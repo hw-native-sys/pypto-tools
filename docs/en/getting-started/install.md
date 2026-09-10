@@ -1,6 +1,6 @@
 # Install the Extension
 
-PyPTO Toolkit is distributed as a VSIX file attached to each GitHub Release. Always download the extension from the official Releases page and avoid packages from unknown sources.
+PyPTO3 Toolkit is distributed as a VSIX file attached to each GitHub Release. Always download the extension from the official Releases page and avoid packages from unknown sources.
 
 ## Download
 
@@ -26,9 +26,9 @@ code --install-extension /path/to/pypto-toolkit-<version>.vsix
 
 After installation, verify the following:
 
-- **PyPTO Toolkit** appears in the extension list with the expected version;
-- commands starting with `PyPTO Toolkit` appear in the Command Palette;
-- right-clicking a supported JSON file or a `passes_dump*` directory in the Explorer shows a PyPTO Toolkit open action.
+- **PyPTO3 Toolkit** appears in the extension list with the expected version;
+- commands starting with `PyPTO3 Toolkit` appear in the Command Palette;
+- right-clicking a supported JSON file or a `passes_dump*` directory in the Explorer shows a PyPTO3 Toolkit open action.
 
 ## Upgrade
 
@@ -38,4 +38,4 @@ After an overwrite installation, run **PyPTO.comGraph: Delete Cache DB File** fr
 
 > **Keep the VS Code display zoom unchanged**
 >
-> After opening a PyPTO Toolkit feature view, do not change the VS Code display zoom level. Changing it may cause layout or rendering issues.
+> After opening a PyPTO3 Toolkit feature view, do not change the VS Code display zoom level. Changing it may cause layout or rendering issues.

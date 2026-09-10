@@ -1,21 +1,21 @@
-# PyPTO Toolkit v4 插件使用说明
+# PyPTO3 Toolkit插件使用说明
 
 [English](README.md) | 简体中文
 
-PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括编译、运行时状态的可视化、算子开发作业流的作业能力，使能开发者快速建立对 PyPTO 3.0 框架的理解，提升算子开发和调试调优效率。
+PyPTO3 Toolkit v1.0.0 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括编译、运行时状态的可视化、算子开发作业流的作业能力，使能开发者快速建立对 PyPTO 3.0 框架的理解，提升算子开发和调试调优效率。
 
 > 面向 PyPTO 3.0 用户的完整使用说明请参阅 [PyPTO Toolkit 中文在线文档](https://www.pypto.ai/pypto-tools/zh/)。文档源码位于 [`docs/`](./docs/)，最新安装包请从 [Releases](https://github.com/hw-native-sys/pypto-tools/releases/latest) 下载。
 
 ## 核心特性
 ### chip级任务记录：
 
-- **chip泳道图：** `chip_swimlane_records.json`（兼容 `l2_swimlane_records.json`），提供片上任务和统计信息的可视化展示，支持基于 `deps.json` 的任务依赖关系分析和已有关键路径结果高亮。
+- **chip泳道图：** `chip_swimlane_records.json`，提供片上任务和统计信息的可视化展示，支持基于 `deps.json` 的任务依赖关系分析和已有关键路径结果高亮。
 
 - **任务依赖图：** `deps.json`，提供任务之间的依赖关系展示和冗余依赖分析功能。
 
 - **函数性能表：** `name_map*.json` 结合同目录泳道数据，按函数汇总执行次数及最大、最小、平均耗时。
 
-- **运行结果打开方式：** chip 级运行结果通常输出在 `build_out/*/dfx_outputs` 目录下。右键受支持的文件并选择 `PyPTO Toolkit：打开文件`，即可使用插件预览。
+- **运行结果打开方式：** chip 级运行结果通常输出在 `build_out/*/dfx_outputs` 目录下。右键受支持的文件并选择 `PyPTO3 Toolkit：打开文件`，即可使用插件预览。
 
 ### pypto pass 记录：
 - **IR trace diff：**  比对`passes_dump`目录下的IR前后记录，显示变化。
@@ -26,7 +26,7 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
 - **打开泳道图**
 
-  右键泳道图文件`chip_swimlane_records.json`，选择`PyPTO Toolkit: 打开文件`即可。根据采集时设置的`--enable-chip-swimlane`的等级，打开的图中会出现对应数量的view。全量采集的泳道图包含：Worker View、Scheduler View、AICPU Scheduler和AICPU Orchestrator。
+  右键泳道图文件`chip_swimlane_records.json`，选择`PyPTO Toolkit3: 打开文件`即可。根据采集时设置的`--enable-chip-swimlane`的等级，打开的图中会出现对应数量的view。以tensormap and ringbuffer 这个runtime全量采集的泳道图包含：Worker View、Scheduler View、AICPU Scheduler和AICPU Orchestrator。
 
     ![image](./.image/1_chip_swim_open.gif)
 
@@ -68,14 +68,6 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
   ![image](./.image/6_chip_swim_set_spmd_line.gif)
 
-
-- **性能看板**
-
-  点击右上角的的`性能统计`按钮，即可查看性能报告，在页面点击节点可以自动定位到图上对应位置，便于用户快速查看性能问题。
-
-  ![image](./.image/7_chip_swim_perf.png)
-
-
 - **泳道置顶**
 
   鼠标悬浮泳道左侧区域，会显示置顶图标，点击即可将本泳道置顶
@@ -87,6 +79,14 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
   点击右上角的的`渲染配置`按钮打开配置面板，可以配置Worker View中的任务记录中，是否区别显示出其setup阶段。也可以直接关闭setup阶段的显示。
 
   ![image](./.image/9_chip_swim_show_setup.gif)
+
+- **性能看板**
+
+  点击右上角的的`性能分析`按钮，即可查看性能报告，在页面点击节点可以自动定位到图上对应位置，便于用户快速查看性能问题。详情可以查看 `chip泳道图性能分析面板`
+
+  ![image](./.image/7_chip_swim_perf.png)
+
+
 
 - **快捷键列表**
 
@@ -139,7 +139,7 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 ## 任务依赖图
 - **打开任务依赖图**
 
-  右键任务依赖文件`deps.json`，选择`PyPTO Toolkit: 打开文件`即可。任务依赖图会将真实执行过程中的任务绘制为节点，并用带方向的连线描述任务之间的依赖关系。
+  右键任务依赖文件`deps.json`，选择`PyPTO3 Toolkit: 打开文件`即可。任务依赖图会将真实执行过程中的任务绘制为节点，并用带方向的连线描述任务之间的依赖关系。
   ![image](./.image/deps_open_file.gif)
 
 - **任务依赖图中的节点信息**
@@ -162,6 +162,26 @@ PyPTO Toolkit v4 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括�
 
   右键pass输出文件夹`passes_dump`，可以使用工具查看PASS阶段里各个IR变化。可以按照是否有更改内容显示哪些PASS阶段。可以按函数过滤显示变更内容。
   ![image](./.image/pass_IR_trace.gif)
+
+## 内存复用分析
+
+  **打开memory map**
+
+  右键`passes_dump`目录中的 *after_AllocateMemoryAddr.py，选择`PyPTO3 Toolkit: 打开内存复用分析器`。或者在打开的chip_swimalne预览面板右上角`openMemoryMap`按钮，即可打开内存复用分析器。
+
+  ![image](./.image/memmap_open.png)
+
+  **buffer利用率总览**
+
+  使用`全部函数 Buffer 使用总览`可以全局预览所有函数的buffer利用率。
+
+  ![image](./.image/memmap_overall.gif)
+
+  **function内tile分析**
+
+  可以通过单击原pass代码中的function块或者使用函数总览下拉菜单选择希望查看的函数内定义的tile占用情况。单击map图中的tile色块，可以看到选中tile的详细信息以及其在原pass代码中的创造和被调用点。所以memory map中的纵坐标含义对应其在pass代码中的tile生命周期。
+
+  ![image](./.image/memmap_single_func.gif)
 
 
 ## 其他辅助功能

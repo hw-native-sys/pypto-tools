@@ -25,7 +25,7 @@ build_out/
 
 ## 2. 查看运行时泳道
 
-在资源管理器中右键 `chip_swimlane_records.json`，选择 **PyPTO Toolkit：打开文件**。插件会根据文件实际包含的记录生成 Worker、Scheduler 和 Orchestrator 等视图。
+在资源管理器中右键 `chip_swimlane_records.json`，选择 **PyPTO3 Toolkit：打开文件**。插件会根据文件实际包含的记录生成 Worker、Scheduler 和 Orchestrator 等视图。
 
 ![打开 Chip Swimlane](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/1_chip_swim_open.gif)
 
@@ -47,7 +47,7 @@ build_out/
 
 ## 6. 分析内存复用
 
-使用 `memory_map` 处理对应的 pass dump，可以生成交互式的片上内存 HTML 地图。横轴显示地址，纵轴向下显示生命周期；每个 tile 展示其 MemRef 占用的字节范围和存活区间。
+右键对应 pass dump 中匹配 `*after_AllocateMemoryAddr.py` 的文件，选择 **PyPTO3 Toolkit：打开内存复用分析器**。也可以在 Chip Swimlane 预览面板右上角点击 **openMemoryMap**。地图横轴显示地址，纵轴向下显示生命周期。
 
 ## 下一步
 

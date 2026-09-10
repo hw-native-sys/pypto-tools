@@ -4,7 +4,7 @@
 
 ## 打开依赖图
 
-在 VS Code 资源管理器中右键名称精确为 `deps.json` 的文件，选择 **PyPTO Toolkit：打开文件**。
+在 VS Code 资源管理器中右键名称精确为 `deps.json` 的文件，选择 **PyPTO3 Toolkit：打开文件**。
 
 ![打开任务依赖图](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/deps_open_file.gif)
 

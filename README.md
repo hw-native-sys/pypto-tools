@@ -1,22 +1,22 @@
-# PyPTO Toolkit v4 Extension User Guide
+# PyPTO3 Toolkit Extension User Guide
 
 English | [简体中文](README.zh.md)
 
-PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framework. It visualizes compilation and runtime states and provides operator development workflow capabilities, helping developers understand PyPTO 3.0 and improve operator development, debugging, and performance tuning efficiency.
+PyPTO3 Toolkit v1.0.0 is an end-to-end development extension for the PyPTO 3.0 framework. It visualizes compilation and runtime states and provides operator development workflow capabilities, helping developers understand PyPTO 3.0 and improve operator development, debugging, and performance tuning efficiency.
 
-> For complete PyPTO 3.0 usage instructions, see the [PyPTO Toolkit documentation](https://www.pypto.ai/pypto-tools/). The documentation source is under [`docs/`](./docs/), and the latest extension package is available from [Releases](https://github.com/hw-native-sys/pypto-tools/releases/latest).
+> For complete PyPTO 3.0 usage instructions, see the [PyPTO3 Toolkit documentation](https://www.pypto.ai/pypto-tools/). The documentation source is under [`docs/`](./docs/), and the latest extension package is available from [Releases](https://github.com/hw-native-sys/pypto-tools/releases/latest).
 
 ## Key Features
 
 ### Chip-level Task Records
 
-- **Chip Swimlane:** `chip_swimlane_records.json` (compatible with `l2_swimlane_records.json`) visualizes on-chip tasks and statistics, analyzes task dependencies using `deps.json`, and highlights existing critical-path results.
+- **Chip Swimlane:** `chip_swimlane_records.json` visualizes on-chip tasks and statistics, analyzes task dependencies using `deps.json`, and highlights existing critical-path results.
 
 - **Task Dependency Graph:** `deps.json` visualizes dependencies between tasks and analyzes redundant dependencies.
 
 - **Function Performance Table:** `name_map*.json`, together with swimlane data in the same directory, aggregates invocation count and maximum, minimum, and average duration by function.
 
-- **Open Runtime Results:** Chip-level runtime results are typically generated under `build_out/*/dfx_outputs`. Right-click a supported file and select `PyPTO Toolkit: Open File` to preview it in the extension.
+- **Open Runtime Results:** Chip-level runtime results are typically generated under `build_out/*/dfx_outputs`. Right-click a supported file and select `PyPTO3 Toolkit: Open File` to preview it in the extension.
 
 ### PyPTO Pass Records
 
@@ -28,7 +28,7 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
 
 - **Open a Swimlane**
 
-  Right-click the swimlane file `chip_swimlane_records.json` and select `PyPTO Toolkit: Open File`. The number of views depends on the `--enable-chip-swimlane` collection level. A full record contains the Worker View, Scheduler View, AICPU Scheduler, and AICPU Orchestrator.
+  Right-click the swimlane file `chip_swimlane_records.json` and select `PyPTO3 Toolkit: Open File`. The number of views depends on the `--enable-chip-swimlane` collection level. For the TensorMap and RingBuffer runtime, a full record contains the Worker View, Scheduler View, AICPU Scheduler, and AICPU Orchestrator.
 
   ![Open a swimlane](./.image/1_chip_swim_open.gif)
 
@@ -66,12 +66,6 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
 
   ![Mark SPMD task boundaries](./.image/6_chip_swim_set_spmd_line.gif)
 
-- **Performance Panel**
-
-  Select **Performance Statistics** in the upper-right corner to view the performance report. Selecting a task in the report locates the corresponding task in the swimlane.
-
-  ![Performance panel](./.image/7_chip_swim_perf.png)
-
 - **Pin a Lane**
 
   Hover over the left side of a lane to display the pin icon, then select it to pin the lane to the top.
@@ -83,6 +77,12 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
   Select **Rendering Settings** in the upper-right corner to configure whether the setup phase is displayed separately in Worker View task records. You can also hide setup entirely.
 
   ![Configure setup display](./.image/9_chip_swim_show_setup.gif)
+
+- **Performance Panel**
+
+  Select **Performance Analysis** in the upper-right corner to view the performance report. Selecting a task in the report locates the corresponding task in the swimlane. See [Chip Swimlane Performance Analysis Panel](#chip-swimlane-performance-analysis-panel) below for details.
+
+  ![Performance panel](./.image/7_chip_swim_perf.png)
 
 - **Keyboard and Mouse Shortcuts**
 
@@ -141,7 +141,7 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
 
 - **Open the Task Dependency Graph**
 
-  Right-click the task dependency file `deps.json` and select `PyPTO Toolkit: Open File`. The graph renders tasks from the actual execution as nodes and uses directed edges to describe dependencies between tasks.
+  Right-click the task dependency file `deps.json` and select `PyPTO3 Toolkit: Open File`. The graph renders tasks from the actual execution as nodes and uses directed edges to describe dependencies between tasks.
 
   ![Open the task dependency graph](./.image/deps_open_file.gif)
 
@@ -168,6 +168,26 @@ PyPTO Toolkit v4 is an end-to-end development extension for the PyPTO 3.0 framew
   Right-click a `passes_dump` directory to inspect IR changes introduced by compiler passes. You can filter changed and unchanged passes and filter differences by function.
 
   ![IR Pass Trace](./.image/pass_IR_trace.gif)
+
+## Memory Reuse Analysis
+
+- **Open the Memory Map**
+
+  Right-click a file matching `*after_AllocateMemoryAddr.py` in a `passes_dump` directory and select `PyPTO3 Toolkit: Open Memory Reuse Analyzer`. Alternatively, select **openMemoryMap** in the upper-right corner of an open Chip Swimlane preview.
+
+  ![Open the memory map](./.image/memmap_open.png)
+
+- **Review Overall Buffer Utilization**
+
+  Use **All Functions Buffer Usage Overview** to review buffer utilization across all functions.
+
+  ![Review overall buffer utilization](./.image/memmap_overall.gif)
+
+- **Analyze Tiles in a Function**
+
+  Select a function block in the original pass source, or choose a function from the overview drop-down list, to inspect the tiles defined in that function. Select a tile block in the map to view its details and find where it is created and used in the original pass source. The vertical axis of the memory map therefore represents the tile's lifetime in the pass source.
+
+  ![Analyze tiles in a function](./.image/memmap_single_func.gif)
 
 ## Other Helper Features
 

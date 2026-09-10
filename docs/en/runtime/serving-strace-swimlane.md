@@ -4,7 +4,7 @@ Serving Strace Swimlane displays the Serving task timeline recorded in `serving-
 
 ## Open a swimlane
 
-In the VS Code Explorer, right-click `serving-strace-swimlane.json` and select **PyPTO Toolkit: Open File**.
+In the VS Code Explorer, right-click `serving-strace-swimlane.json` and select **PyPTO3 Toolkit: Open File**.
 
 ![Open Serving Strace Swimlane](https://raw.githubusercontent.com/hw-native-sys/pypto-tools/main/.image/serving-strace-swimlane_open.gif)
 

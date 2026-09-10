@@ -1,6 +1,6 @@
 # Prepare Analysis Files
 
-PyPTO Toolkit does not collect or generate PyPTO runtime records. It reads files already produced by the framework and visualizes them. More complete input data enables more detailed views.
+PyPTO3 Toolkit does not collect or generate PyPTO runtime records. It reads files already produced by the framework and visualizes them. More complete input data enables more detailed views.
 
 ## Runtime files
 
@@ -61,4 +61,4 @@ The following constraints apply:
 - pass numbering must start at 1 and remain consecutive, with no missing or duplicate numbers;
 - a matching `.log` file is optional.
 
-The same pass dump can also be processed by `memory_map` for [Memory Reuse Analysis](../compiler/memory-reuse.md). The analysis uses the pass dump to show the address range and lifetime of each MemRef.
+A file matching `*after_AllocateMemoryAddr.py` in the same pass dump can be opened directly for [Memory Reuse Analysis](../compiler/memory-reuse.md). The analysis shows the address range and lifetime of each MemRef.
