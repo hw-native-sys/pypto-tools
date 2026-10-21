@@ -14,10 +14,13 @@ The extension creates views based on the data actually present in the input file
 |---|---|
 | Worker View | Shows task start time, end time, and duration on each AIC/AIV core |
 | Scheduler View | Shows AICPU scheduling intervals from dispatch to finish |
-| AICPU Scheduler | Shows phases such as dispatch, early_dispatch, wire, release, resolve, and drain |
-| AICPU Orchestrator | Shows orchestrator submission phases and their relationship with the scheduler |
+| AICPU Scheduler or AICore Scheduler | Shows producer-tagged scheduling phases such as dispatch, early_dispatch, wire, release, resolve, and drain |
+| AICPU Orchestrator or Host Orchestrator | Shows orchestrator submission phases and their relationship with the scheduler |
+| H2D | Shows Host-to-Device upload phases when the capture contains them |
 
-For the TensorMap and RingBuffer runtime, a full record contains all four views listed above. A low record level does not infer higher-level scheduling data. For example, a file containing only worker tasks does not produce a complete AICPU Scheduler view.
+For the TensorMap and RingBuffer runtime, a full record contains the Worker, Scheduler, AICPU Scheduler, and AICPU Orchestrator views. Host Build Graph captures can instead contain AICore Scheduler, Host Orchestrator, and H2D data. The views depend on the record level and fields actually present; a file containing only worker tasks does not produce a complete scheduler view.
+
+When a Host Build Graph capture contains bounded Host/Device clock alignment, the extension places Host and Device events on the same timeline. Without that alignment, it retains the available lanes but the gap between Host and Device events is not a measured latency.
 
 ## Inspect task details and dependencies
 

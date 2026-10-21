@@ -2,9 +2,11 @@
 
 [English](README.md) | 简体中文
 
-PyPTO3 Toolkit v1.0.0 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括编译、运行时状态的可视化、算子开发作业流的作业能力，使能开发者快速建立对 PyPTO 3.0 框架的理解，提升算子开发和调试调优效率。
+PyPTO3 Toolkit 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括编译、运行时状态的可视化、算子开发作业流的作业能力，使能开发者快速建立对 PyPTO 3.0 框架的理解，提升算子开发和调试调优效率。
 
 > 面向 PyPTO 3.0 用户的完整使用说明请参阅 [PyPTO Toolkit 中文在线文档](https://www.pypto.ai/pypto-tools/zh/)。文档源码位于 [`docs/`](./docs/)，最新安装包请从 [Releases](https://github.com/hw-native-sys/pypto-tools/releases/latest) 下载。
+
+v1.0.2 Release 列出了插件源码提交和已检查的 `simpler` runtime 提交。使用其他提交生成的运行数据前，请查看[安装与兼容性说明](docs/zh/getting-started/install.md)。本仓库存放文档和 Release 附件；GitHub 自动生成的源码压缩包并不是插件源码。
 
 ## 核心特性
 ### chip级任务记录：
@@ -26,7 +28,7 @@ PyPTO3 Toolkit v1.0.0 是一款 PyPTO 3.0 框架全流程辅助工具，提供�
 
 - **打开泳道图**
 
-  右键泳道图文件`chip_swimlane_records.json`，选择`PyPTO Toolkit3: 打开文件`即可。根据采集时设置的`--enable-chip-swimlane`的等级，打开的图中会出现对应数量的view。以tensormap and ringbuffer 这个runtime全量采集的泳道图包含：Worker View、Scheduler View、AICPU Scheduler和AICPU Orchestrator。
+  右键泳道图文件`chip_swimlane_records.json`，选择`PyPTO3 Toolkit: 打开文件`即可。根据采集时设置的`--enable-chip-swimlane`的等级，打开的图中会出现对应数量的view。以tensormap and ringbuffer 这个runtime全量采集的泳道图包含：Worker View、Scheduler View、AICPU Scheduler和AICPU Orchestrator。
 
     ![image](./.image/1_chip_swim_open.gif)
 

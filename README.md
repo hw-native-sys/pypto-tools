@@ -2,9 +2,11 @@
 
 English | [简体中文](README.zh.md)
 
-PyPTO3 Toolkit v1.0.0 is an end-to-end development extension for the PyPTO 3.0 framework. It visualizes compilation and runtime states and provides operator development workflow capabilities, helping developers understand PyPTO 3.0 and improve operator development, debugging, and performance tuning efficiency.
+PyPTO3 Toolkit is an end-to-end development extension for the PyPTO 3.0 framework. It visualizes compilation and runtime states and provides operator development workflow capabilities, helping developers understand PyPTO 3.0 and improve operator development, debugging, and performance tuning efficiency.
 
 > For complete PyPTO 3.0 usage instructions, see the [PyPTO3 Toolkit documentation](https://www.pypto.ai/pypto-tools/). The documentation source is under [`docs/`](./docs/), and the latest extension package is available from [Releases](https://github.com/hw-native-sys/pypto-tools/releases/latest).
+
+The v1.0.2 Release lists its extension source commit and checked `simpler` runtime commits. See the [installation and compatibility notes](docs/en/getting-started/install.md) before using that VSIX with runtime data from another revision. This repository contains documentation and Release assets; the automatically generated GitHub source archives are not the extension source.
 
 ## Key Features
 

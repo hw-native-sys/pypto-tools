@@ -14,10 +14,13 @@ Chip Swimlane 用于查看 PyPTO 3.0 任务从调度到 AICore 执行的时序�
 |---|---|
 | Worker View | 展示任务在 AIC/AIV Core 上的开始、结束和执行时长 |
 | Scheduler View | 展示 AICPU 从 dispatch 到 finish 的调度区间 |
-| AICPU Scheduler | 展示 dispatch、early_dispatch、wire、release、resolve、drain 等阶段 |
-| AICPU Orchestrator | 展示 Orchestrator 提交阶段及其与 Scheduler 的关联 |
+| AICPU Scheduler 或 AICore Scheduler | 展示按生产者区分的 dispatch、early_dispatch、wire、release、resolve、drain 等调度阶段 |
+| AICPU Orchestrator 或 Host Orchestrator | 展示 Orchestrator 提交阶段及其与 Scheduler 的关联 |
+| H2D | 在采集数据包含相应记录时展示 Host 到 Device 的上传阶段 |
 
-对于 TensorMap 和 RingBuffer runtime，全量采集的记录包含以上四个视图。低记录级别不会凭空推导高级调度信息。例如，只包含 Worker 任务的文件不会生成完整 AICPU Scheduler 视图。
+对于 TensorMap 和 RingBuffer runtime，全量采集的记录包含 Worker、Scheduler、AICPU Scheduler 和 AICPU Orchestrator 视图。Host Build Graph 的记录也可能包含 AICore Scheduler、Host Orchestrator 和 H2D 数据。实际视图取决于采集级别和文件字段；只包含 Worker 任务的文件不会生成完整的调度视图。
+
+Host Build Graph 数据具有有界的 Host/Device 时钟对齐信息时，插件会将两侧事件放在同一时间轴上。缺少对齐信息时，仍保留可用泳道，但 Host 与 Device 事件之间的间隔不能视为实测延迟。
 
 ## 查看任务详情与依赖
 
