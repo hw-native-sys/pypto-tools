@@ -4,7 +4,7 @@ PyPTO3 Toolkit is distributed as a VSIX file attached to each GitHub Release. Al
 
 ## Download
 
-1. Open the [latest Release](https://github.com/hw-native-sys/pypto-tools/releases/latest).
+1. Open the [Releases page](https://github.com/hw-native-sys/pypto-tools/releases) and choose the newest release whose tag starts with `v`.
 2. Under **Assets**, download the file named like `pypto3-toolkit-<version>.vsix`.
 3. To reproduce an older environment, download the matching version from the [Releases list](https://github.com/hw-native-sys/pypto-tools/releases).
 

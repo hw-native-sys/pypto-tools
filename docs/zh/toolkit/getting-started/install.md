@@ -4,7 +4,7 @@ PyPTO3 Toolkit 以 VSIX 文件随 GitHub Release 发布。建议始终从官方 
 
 ## 下载
 
-1. 打开 [最新 Release](https://github.com/hw-native-sys/pypto-tools/releases/latest)。
+1. 打开 [Releases 页面](https://github.com/hw-native-sys/pypto-tools/releases)，选择 tag 以 `v` 开头的最新 Release。
 2. 在 **Assets** 中下载名称类似 `pypto3-toolkit-<version>.vsix` 的文件。
 3. 如需复现历史环境，可从 [Releases 列表](https://github.com/hw-native-sys/pypto-tools/releases) 下载对应版本。
 

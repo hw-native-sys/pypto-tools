@@ -1,12 +1,19 @@
-# PyPTO3 Toolkit Extension User Guide
+# pypto-tools
 
 English | [简体中文](README.zh.md)
 
-PyPTO3 Toolkit is an end-to-end development extension for the PyPTO 3.0 framework. It visualizes compilation and runtime states and provides operator development workflow capabilities, helping developers understand PyPTO 3.0 and improve operator development, debugging, and performance tuning efficiency.
+This repository distributes two independent tools and their documentation. Each tool has its own tag prefix; filter the [release list](https://github.com/hw-native-sys/pypto-tools/releases) by prefix to find its latest package.
 
-> For complete PyPTO 3.0 usage instructions, see the [PyPTO3 Toolkit documentation](https://www.pypto.ai/pypto-tools/). The documentation source is under [`docs/`](./docs/), and the latest extension package is available from [Releases](https://github.com/hw-native-sys/pypto-tools/releases/latest).
+| Tool | Purpose | Tag prefix | Asset | Documentation |
+|---|---|---|---|---|
+| PyPTO3 Toolkit | VS Code extension for PyPTO 3.0 runtime and compilation analysis | `v*` | VSIX | [User guide](./docs/en/toolkit/index.md) |
+| task-submit | NPU job queue for a shared Ascend host | `task-submit-v*` | `task-submit-<version>.tar.gz` and `.sha256` | [Documentation](./docs/en/task-submit/index.md) |
 
-The v1.0.2 Release lists its extension source commit and checked `simpler` runtime commits. See the [installation and compatibility notes](docs/en/getting-started/install.md) before using that VSIX with runtime data from another revision. This repository contains documentation and Release assets; the automatically generated GitHub source archives are not the extension source.
+## PyPTO3 Toolkit
+
+A VS Code extension for PyPTO 3.0 runtime and compilation analysis. See the [user guide](./docs/en/toolkit/index.md) or the [online documentation](https://www.pypto.ai/pypto-tools/).
+
+The v1.0.2 release records the extension source commit and the checked `simpler` commits; see the [installation and compatibility notes](docs/en/toolkit/getting-started/install.md) before mixing revisions. The extension source is not in this repository, and GitHub's generated source archives are not the extension source.
 
 ## Key Features
 
