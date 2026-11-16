@@ -1,7 +1,7 @@
 INHERIT: .site-theme/docs-theme/base.yml
 
 site_name: PyPTO Toolkit
-site_description: User documentation for the PyPTO 3.0 IDE extension
+site_description: User documentation for the PyPTO 3.0 IDE extension and task-submit
 site_url: https://www.pypto.ai/pypto-tools/
 
 repo_url: https://github.com/hw-native-sys/pypto-tools
@@ -51,6 +51,9 @@ plugins:
             Function Performance: 函数性能表
             Compiler Analysis: 编译分析
             Memory Reuse Analysis: 内存复用分析
+            Overview: 概览
+            Install and Upgrade: 安装与升级
+            Basic Usage: 基本使用
 
 markdown_extensions:
   - attr_list
@@ -75,15 +78,21 @@ validation:
 
 nav:
   - Home: index.md
-  - Getting Started:
-      - Install the Extension: getting-started/install.md
-      - Quick Start: getting-started/quick-start.md
-      - Prepare Analysis Files: getting-started/data-files.md
-  - Runtime Analysis:
-      - Chip Swimlane: runtime/chip-swimlane.md
-      - Serving Strace Swimlane: runtime/serving-strace-swimlane.md
-      - Task Dependency Graph: runtime/dependency-graph.md
-      - Function Performance: runtime/function-performance.md
-  - Compiler Analysis:
-      - IR Pass Trace: compiler/ir-pass-trace.md
-      - Memory Reuse Analysis: compiler/memory-reuse.md
+  - PyPTO3 Toolkit:
+      - Overview: toolkit/index.md
+      - Getting Started:
+          - Install the Extension: toolkit/getting-started/install.md
+          - Quick Start: toolkit/getting-started/quick-start.md
+          - Prepare Analysis Files: toolkit/getting-started/data-files.md
+      - Runtime Analysis:
+          - Chip Swimlane: toolkit/runtime/chip-swimlane.md
+          - Serving Strace Swimlane: toolkit/runtime/serving-strace-swimlane.md
+          - Task Dependency Graph: toolkit/runtime/dependency-graph.md
+          - Function Performance: toolkit/runtime/function-performance.md
+      - Compiler Analysis:
+          - IR Pass Trace: toolkit/compiler/ir-pass-trace.md
+          - Memory Reuse Analysis: toolkit/compiler/memory-reuse.md
+  - task-submit:
+      - Overview: task-submit/index.md
+      - Install and Upgrade: task-submit/install.md
+      - Basic Usage: task-submit/usage.md

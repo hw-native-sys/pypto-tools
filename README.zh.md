@@ -1,12 +1,19 @@
-# PyPTO3 Toolkit插件使用说明
+# pypto-tools
 
 [English](README.md) | 简体中文
 
-PyPTO3 Toolkit 是一款 PyPTO 3.0 框架全流程辅助工具，提供包括编译、运行时状态的可视化、算子开发作业流的作业能力，使能开发者快速建立对 PyPTO 3.0 框架的理解，提升算子开发和调试调优效率。
+本仓库分发两个相互独立的工具及其文档。每个工具使用独立的 tag 前缀，请在 [Release 列表](https://github.com/hw-native-sys/pypto-tools/releases) 中按前缀筛选其最新安装包。
 
-> 面向 PyPTO 3.0 用户的完整使用说明请参阅 [PyPTO Toolkit 中文在线文档](https://www.pypto.ai/pypto-tools/zh/)。文档源码位于 [`docs/`](./docs/)，最新安装包请从 [Releases](https://github.com/hw-native-sys/pypto-tools/releases/latest) 下载。
+| 工具 | 用途 | Tag 前缀 | 附件 | 文档 |
+|---|---|---|---|---|
+| PyPTO3 Toolkit | 用于 PyPTO 3.0 运行时和编译分析的 VS Code 插件 | `v*` | VSIX | [用户文档](./docs/zh/toolkit/index.md) |
+| task-submit | 共享 Ascend 主机上的 NPU 任务队列 | `task-submit-v*` | `task-submit-<version>.tar.gz` 和 `.sha256` | [文档](./docs/zh/task-submit/index.md) |
 
-v1.0.2 Release 列出了插件源码提交和已检查的 `simpler` runtime 提交。使用其他提交生成的运行数据前，请查看[安装与兼容性说明](docs/zh/getting-started/install.md)。本仓库存放文档和 Release 附件；GitHub 自动生成的源码压缩包并不是插件源码。
+## PyPTO3 Toolkit
+
+用于 PyPTO 3.0 运行时和编译分析的 VS Code 插件。详见[用户文档](./docs/zh/toolkit/index.md)或[在线文档](https://www.pypto.ai/pypto-tools/zh/)。
+
+v1.0.2 Release 注明了插件源码提交和已检查的 `simpler` 提交；混用不同提交的运行时数据前，请查看[安装与兼容性说明](docs/zh/toolkit/getting-started/install.md)。插件源码不在本仓库，GitHub 自动生成的源码压缩包并不是插件源码。
 
 ## 核心特性
 ### chip级任务记录：
